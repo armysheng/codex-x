@@ -1,6 +1,6 @@
 {
   "name": "create-codex-x",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "bin": {
     "create-codex-x": "./bin/create-codex-x.mjs"

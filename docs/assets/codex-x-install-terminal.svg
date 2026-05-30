@@ -1,0 +1,37 @@
+<svg width="1600" height="960" viewBox="0 0 1600 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="80" x2="1480" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <filter id="shadow" x="110" y="120" width="1380" height="760" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#020617" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="960" fill="url(#bg)"/>
+  <circle cx="1410" cy="150" r="210" fill="#38BDF8" fill-opacity="0.12"/>
+  <circle cx="180" cy="860" r="260" fill="#14B8A6" fill-opacity="0.08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="150" y="160" width="1300" height="640" rx="30" fill="#020617" stroke="#1E293B" stroke-width="1.5"/>
+  </g>
+
+  <rect x="150" y="160" width="1300" height="72" rx="30" fill="#0B1220"/>
+  <circle cx="198" cy="196" r="8" fill="#F87171"/>
+  <circle cx="226" cy="196" r="8" fill="#FBBF24"/>
+  <circle cx="254" cy="196" r="8" fill="#34D399"/>
+  <text x="292" y="204" fill="#94A3B8" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">one-command install</text>
+
+  <text x="184" y="294" fill="#E2E8F0" font-size="28" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">$ bash &lt;(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)</text>
+  <text x="184" y="354" fill="#94A3B8" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">Cloning into '/Users/demo/codex-x'...</text>
+  <text x="184" y="402" fill="#94A3B8" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">added 3 packages in 1s</text>
+  <text x="184" y="450" fill="#94A3B8" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">Initialized codex-x workspace at /Users/demo/codex-x/my-workspace</text>
+
+  <text x="184" y="530" fill="#67E8F9" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">codex-x installed successfully.</text>
+  <text x="184" y="588" fill="#E2E8F0" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">Repo: /Users/demo/codex-x</text>
+  <text x="184" y="630" fill="#E2E8F0" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">Workspace: /Users/demo/codex-x/my-workspace</text>
+  <text x="184" y="688" fill="#A5F3FC" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">Next: cd /Users/demo/codex-x/my-workspace &amp;&amp; codex</text>
+
+  <text x="184" y="760" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">A single command clones the repo, installs dependencies, and bootstraps a memory-first workspace.</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg width="1600" height="960" viewBox="0 0 1600 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="100" y1="90" x2="1500" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="shadow" x="90" y="120" width="1420" height="760" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#020617" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="960" fill="url(#bg)"/>
+  <circle cx="1380" cy="180" r="240" fill="#22D3EE" fill-opacity="0.12"/>
+  <circle cx="240" cy="820" r="260" fill="#10B981" fill-opacity="0.08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="130" y="160" width="1340" height="650" rx="30" fill="#020617" stroke="#1E293B" stroke-width="1.5"/>
+  </g>
+
+  <rect x="130" y="160" width="1340" height="72" rx="30" fill="#0B1220"/>
+  <circle cx="178" cy="196" r="8" fill="#F87171"/>
+  <circle cx="206" cy="196" r="8" fill="#FBBF24"/>
+  <circle cx="234" cy="196" r="8" fill="#34D399"/>
+  <text x="272" y="204" fill="#94A3B8" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">doctor + smoke</text>
+
+  <text x="166" y="294" fill="#E2E8F0" font-size="26" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">$ node packages/feishu-codex-cli/bin/feishu-codex.mjs doctor</text>
+  <text x="166" y="344" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">{</text>
+  <text x="194" y="384" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">"ready": false,</text>
+  <text x="194" y="424" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">"dependencies": { "codex": true, "larkCli": true },</text>
+  <text x="194" y="464" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">"workspace": { "exists": false },</text>
+  <text x="194" y="504" fill="#67E8F9" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">"nextActions": ["配置 codexWorkdir，指向你的本地 Codex 工作区。"]</text>
+  <text x="166" y="544" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">}</text>
+
+  <text x="166" y="628" fill="#E2E8F0" font-size="26" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">$ node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge smoke</text>
+  <text x="166" y="678" fill="#67E8F9" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">Bridge smoke test passed</text>
+  <text x="166" y="718" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">dry-run ok</text>
+
+  <text x="166" y="782" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">Before wiring Feishu for real, you can verify the local toolchain and runtime path with doctor + smoke.</text>
+</svg>

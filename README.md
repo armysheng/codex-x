@@ -77,7 +77,7 @@ npm install
 ### 2. 初始化一个工作区
 
 ```bash
-node packages/create-codex-x/bin/create-codex-x.mjs \
+node ./bin/codex-x.mjs init \
   --answers examples/bootstrap.answers.example.json \
   ./tmp/my-workspace
 ```
@@ -88,6 +88,24 @@ node packages/create-codex-x/bin/create-codex-x.mjs \
 npx create-codex-x my-workspace
 cd my-workspace
 codex
+```
+
+## 直接丢给 Codex
+
+如果你想让 Codex 直接帮你装，不想自己记命令，可以把下面这段原样丢给它：
+
+```text
+请在当前仓库根目录执行：
+
+1. `npm install`
+2. `node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./tmp/my-workspace`
+3. 告诉我生成后的工作区结构，并提醒我下一步进入 `./tmp/my-workspace` 使用 `codex`
+```
+
+如果你想走交互式初始化，把第 2 步换成：
+
+```text
+`node ./bin/codex-x.mjs init ./tmp/my-workspace`
 ```
 
 ### 3. 可选：接飞书桥接

@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "Memory-first Codex workspace template, bootstrapper, and optional Feishu bridge.",
   "type": "module",
+  "bin": {
+    "codex-x": "./bin/codex-x.mjs"
+  },
   "workspaces": [
     "packages/*"
   ],
@@ -12,6 +15,7 @@
   },
   "scripts": {
     "test": "npm run test --workspaces --if-present",
-    "lint:names": "node ./scripts/check-redactions.mjs"
+    "lint:names": "node ./scripts/check-redactions.mjs",
+    "init:workspace": "node ./bin/codex-x.mjs init"
   }
 }

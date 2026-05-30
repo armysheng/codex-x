@@ -17,10 +17,16 @@ npm install
 ## 2. 生成一个工作区
 
 ```bash
-node packages/create-codex-x/bin/create-codex-x.mjs --answers examples/bootstrap.answers.example.json ./tmp/my-workspace
+node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./tmp/my-workspace
 ```
 
 如果不带 `--answers`，初始化器会进入交互式问答。
+
+也可以这样：
+
+```bash
+npm run init:workspace -- ./tmp/my-workspace
+```
 
 ## 3. 进入工作区使用 Codex
 

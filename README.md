@@ -1,6 +1,6 @@
 # codex-x
 
-`codex-x` 是一个给 Codex 用的本地优先工作区工具箱。
+`codex-x` 是一个给 Codex 用的本地工作区工具箱。
 
 它解决的是这几个很实际的问题：
 
@@ -8,11 +8,11 @@
 - 想让 Codex 记住你、记住项目、记住阶段上下文，但不想搭数据库
 - 想把飞书消息桥接到本地 Codex，又不想一开始就上复杂平台
 
-`codex-x` 的做法很克制：
+它不是一个“大而全 AI 平台”，而是把 3 件事拆清楚：
 
-- 用**文件**做记忆，而不是先上服务端
-- 用一个**初始化器**把工作区直接搭起来
-- 用一个**可选 CLI** 把飞书接到本地 Codex
+- 给 Codex 一个**能长期记住上下文**的工作区
+- 给用户一个**一条命令就能装起来**的初始化入口
+- 给需要消息入口的人一个**可选的飞书桥接 CLI**
 
 ## 一条命令安装
 
@@ -28,11 +28,9 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 
 如果你想让 Codex 代你安装，直接把这句丢给它也行。
 
-## 你可以把它理解成什么
+## 一句话解释
 
-如果一句话解释：
-
-> `codex-x` = 一个给 Codex 用的、带记忆系统的本地工作区骨架，再加一个可选的消息桥接入口。
+> `codex-x` = 一个带记忆系统的 Codex 工作区骨架 + 一个初始化器 + 一个可选的飞书桥接入口。
 
 ## 为什么它值得被 star
 
@@ -59,25 +57,30 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 | 只做桥接机器人 | 能发消息，但不记项目 | 桥接只是入口，工作区记忆才是核心 |
 | 大而全 AI 平台 | 学习成本高，定制度低 | 只保留现在真的存在的 3 个能力包 |
 
-## 核心能力
+## 三个模块分别做什么
 
-- `@codex-x/workspace-template`
-  最小记忆系统模板，提供身份、上下文、日记和归档骨架。
+| 模块 | 它解决什么 | 你什么时候需要它 |
+|---|---|---|
+| `workspace-template` | 给 Codex 一个默认可用的记忆系统骨架 | 你想让 Codex 记住“你是谁、项目到哪一步了、最近做过什么” |
+| `create-codex-x` | 把模板真正初始化成一个可用工作区 | 你不想手动复制目录和改文件，想一条命令完成安装 |
+| `feishu-codex-cli` | 把飞书作为消息入口接到本地 Codex | 你已经有本地工作区，想从飞书发消息驱动它 |
 
-- `create-codex-x`
-  初始化器，一条命令生成工作区并完成首批文件写入。
+更直接一点：
 
-- `feishu-codex-cli`
-  可选桥接，把飞书接到本地 Codex。
-  当前已支持：
-  - `init`
-  - `doctor`
-  - `bridge start`
-  - `bridge status`
-  - `bridge logs`
-  - `bridge stop`
-  - `bridge smoke`
-  - `send`
+- **只想让 Codex 有记忆**：用 `workspace-template`
+- **想快速装起来**：用 `create-codex-x`
+- **想把飞书接进来**：再加 `feishu-codex-cli`
+
+当前 `feishu-codex-cli` 已支持：
+
+- `init`
+- `doctor`
+- `bridge start`
+- `bridge status`
+- `bridge logs`
+- `bridge stop`
+- `bridge smoke`
+- `send`
 
 ## 手动安装（如果你想自己控制每一步）
 
@@ -147,11 +150,11 @@ packages/
 └── feishu-codex-cli/
 ```
 
-原则是：
+这样组织的目的很简单：
 
 - 顶层只表达现在真的存在的 3 个能力
-- 共享逻辑先在包内分层，不急着拆更多包
-- `docs/` 和 `examples/` 统一放根目录
+- 每个能力都能独立理解，不需要先懂整个平台
+- 以后要扩更多入口时，再从包内抽共享层，不提前过度设计
 
 ## 适合谁
 
@@ -195,20 +198,20 @@ packages/
 飞书 CLI 是可选模块。只想用记忆系统和初始化器，直接用：
 
 ```bash
-node packages/create-codex-x/bin/create-codex-x.mjs ...
+node ./bin/codex-x.mjs init ...
 ```
 
 就够了。
 
-### 现在为什么还没直接拆成很多共享包？
+### 为什么只保留 3 个模块？
 
-因为当前真正存在的能力就 3 个：
+因为当前真正存在、而且用户真的会直接接触到的能力就 3 个：
 
 - `workspace-template`
 - `create-codex-x`
 - `feishu-codex-cli`
 
-现在先把边界贴着真实功能长，比一开始就平台化更健康。
+先把这 3 个模块讲清楚、做好用，比一开始拆成很多抽象层更健康。
 
 ### 这个项目现在最缺什么？
 

@@ -239,6 +239,8 @@ node ./scripts/check-redactions.mjs
 - [Feishu Setup](./docs/feishu-setup.md)
 - [FAQ](./docs/faq.md)
 - [Positioning](./docs/positioning.md)
+- [Launch Kit](./docs/launch-kit.md)
+- [Screenshots Plan](./docs/screenshots.md)
 - [Release Checklist](./docs/release-checklist.md)
 - [Contributing](./CONTRIBUTING.md)
 

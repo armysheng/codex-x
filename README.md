@@ -275,6 +275,7 @@ node ./scripts/check-redactions.mjs
 - [FAQ](./docs/faq.md)
 - [Positioning](./docs/positioning.md)
 - [Launch Kit](./docs/launch-kit.md)
+- [Promotion Kit](./docs/promotion-kit.md)
 - [Channel Posts](./docs/channel-posts.md)
 - [Final Posts](./docs/final-posts.md)
 - [First Week Checklist](./docs/first-week-checklist.md)

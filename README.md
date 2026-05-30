@@ -264,6 +264,7 @@ node ./scripts/check-redactions.mjs
 - [FAQ](./docs/faq.md)
 - [Positioning](./docs/positioning.md)
 - [Launch Kit](./docs/launch-kit.md)
+- [Channel Posts](./docs/channel-posts.md)
 - [Screenshots Plan](./docs/screenshots.md)
 - [Release Checklist](./docs/release-checklist.md)
 - [Contributing](./CONTRIBUTING.md)

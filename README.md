@@ -7,112 +7,90 @@
 [![License](https://img.shields.io/github/license/armysheng/codex-x?style=flat-square)](./LICENSE)
 [![Codex](https://img.shields.io/badge/Built_for-Codex-0ea5e9?style=flat-square)](https://github.com/armysheng/codex-x)
 
-![codex-x overview](./docs/assets/codex-x-overview.svg)
+`codex-x` 是一套 memory-first 的 Codex 本地工作区工具箱。
 
-![codex-x install demo](./docs/assets/codex-x-install-terminal.svg)
+它不想做一个“大而全 AI 平台”。它先把几件日常刚需做好：给 Codex 一个能长期记住上下文的工作区，一条命令初始化，按需接入飞书消息入口，再用可选 skills 扩展插件解锁、异地访问这类能力。
 
-![codex-x doctor smoke demo](./docs/assets/codex-x-doctor-smoke.svg)
+截图会用真实运行截图补上；当前 README 先保留清晰结构，不放占位图。
 
-![codex-x workspace structure](./docs/assets/codex-x-workspace-structure.svg)
-
-![codex-x daily digest](./docs/assets/codex-x-digest.svg)
-
-`codex-x` 是一个给 Codex 用的本地工作区工具箱。
-
-它解决的是这几个很实际的问题：
-
-- 每次开新会话，AI 都像失忆了一样
-- 想让 Codex 记住你、记住项目、记住阶段上下文，但不想搭数据库
-- 想把飞书消息桥接到本地 Codex，又不想一开始就上复杂平台
-
-它不是一个“大而全 AI 平台”，而是把 3 件事拆清楚：
-
-- 给 Codex 一个**能长期记住上下文**的工作区
-- 给用户一个**一条命令就能装起来**的初始化入口
-- 给需要消息入口的人一个**可选的飞书桥接 CLI**
-
-## 一条命令安装
+## 一条命令装起来
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
 ```
 
-这条命令会：
+默认会完成三件事：
 
-1. 拉取 `codex-x`
-2. 安装依赖
-3. 初始化一个默认工作区
+1. 克隆或更新 `codex-x` 到 `~/codex-x`
+2. 安装 Node 依赖
+3. 初始化 `~/codex-x/my-workspace`，并询问是否注册每日记忆整理 automation
 
-如果你想让 Codex 代你安装，直接把这句丢给它也行。
+安装后进入工作区：
 
-## 一句话解释
+```bash
+cd ~/codex-x/my-workspace
+codex
+```
 
-> `codex-x` = 一个带记忆系统的 Codex 工作区骨架 + 一个初始化器 + 一个可选的飞书桥接入口。
+## 直接丢给 Codex 的提示词
 
-## 为什么它值得被 star
+如果你不想自己记命令，把下面这段原样交给 Codex：
 
-因为它不是另一个“大而全 AI 框架”，而是一个更容易真正用起来的组合：
+```text
+请帮我安装 codex-x，并把它作为我的 Codex 本地记忆工作区。
 
-1. **Memory-first**
-   把 `status / context / daily memory / long-term memory` 这套结构直接变成可用工作区。
+请执行：
+bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
 
-2. **Codex-native**
-   不要求你离开本地开发流，不要求你先搭后端。
+要求：
+1. 安装完成后告诉我 repo 目录和 workspace 目录。
+2. 确认是否注册了“每日记忆整理”Codex automation。
+3. 如果注册失败，说明原因，并告诉我如何补装：
+   node ~/codex-x/bin/codex-x.mjs automation install ~/codex-x/my-workspace
+4. 不要替我发布任何内容，不要改动无关项目。
+5. 最后提醒我进入 workspace 后运行 `codex`。
+```
 
-3. **Low-friction**
-   先把最小闭环跑通，再按需接飞书桥接。
+如果你想自己指定目录：
 
-4. **Extensible without over-engineering**
-   顶层只有 3 个功能包，但后面还能继续长。
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh) \
+  --workspace "$HOME/my-codex-workspace"
+```
 
-## 为什么不是别的方案
+## 它解决什么
 
-| 方案 | 问题 | `codex-x` 的取舍 |
-|---|---|---|
-| 纯 prompt / 单个 AGENTS 文件 | 很快失去阶段上下文 | 直接给你 `status / context / daily memory / long-term memory` 的文件结构 |
-| 一开始就上数据库 / SaaS | 太重，很多人用不起来 | 先本地优先，先跑通最小闭环 |
-| 只做桥接机器人 | 能发消息，但不记项目 | 桥接只是入口，工作区记忆才是核心 |
-| 大而全 AI 平台 | 学习成本高，定制度低 | 只保留现在真的存在的 3 个能力包 |
+Codex 很适合日常协作，但每次新会话都会重新醒来。如果上下文只存在聊天里，项目很快会变成反复解释、反复补背景。
 
-## 三个模块分别做什么
+`codex-x` 把连续性放回本地文件系统：
 
-| 模块 | 它解决什么 | 你什么时候需要它 |
-|---|---|---|
-| `workspace-template` | 给 Codex 一个默认可用的记忆系统骨架 | 你想让 Codex 记住“你是谁、项目到哪一步了、最近做过什么” |
-| `create-codex-x` | 把模板真正初始化成一个可用工作区 | 你不想手动复制目录和改文件，想一条命令完成安装 |
-| `feishu-codex-cli` | 把飞书作为消息入口接到本地 Codex | 你已经有本地工作区，想从飞书发消息驱动它 |
+- Codex 进入工作区时，先读身份、用户、项目状态和最近记忆。
+- 工作中遇到重要决策、教训、资源变化和待办，就写回 daily memory。
+- 每天通过 Codex automation 自动整理一次，把零散记录沉淀到 `status.md`、`context.md` 和长期记忆。
+- 飞书桥接、插件解锁、异地访问都只是可选入口，不污染默认工作区。
 
-更直接一点：
+## 记忆系统
 
-- **只想让 Codex 有记忆**：用 `workspace-template`
-- **想快速装起来**：用 `create-codex-x`
-- **想把飞书接进来**：再加 `feishu-codex-cli`
-
-## 记忆系统长什么样
-
-`codex-x` 的核心不是命令集合，而是一套给 Codex 读写的本地记忆结构。
-
-它把“我是谁”“用户是谁”“项目现在到哪一步”“今天发生了什么”“哪些结论值得长期保留”拆成不同层级的文件。Codex 每次进入工作区时先读这些文件，工作中再把重要信息写回去。
-
-默认目录大概是这样：
+核心是一套给 Codex 读写的文件结构，而不是数据库或隐藏服务。
 
 ```text
 my-workspace/
 ├── AGENTS.md                         # Codex 进入工作区时先读的总规则
 ├── CLAUDE.md                         # 兼容 Claude Code 的入口规则
+├── HEARTBEAT.md                      # 心跳/后台检查规则
 ├── 0-System/
 │   ├── about-me/
-│   │   ├── README.md                 # 说明这些身份/记忆文件怎么用
+│   │   ├── README.md                 # about-me 目录说明
 │   │   ├── SOUL.md                   # 助手的气质、判断方式、说话风格
 │   │   ├── USER.md                   # 用户称呼、偏好、背景
 │   │   ├── IDENTITY.md               # 助手自己的名字和身份
 │   │   ├── MEMORY.md                 # 长期稳定记忆
-│   │   ├── TOOLS.md                  # 本地工具、账号、环境说明
-│   │   └── HEARTBEAT.md              # 心跳/后台检查规则
+│   │   ├── TOOLS.md                  # 本地工具、环境、使用笔记
+│   │   └── HEARTBEAT.md              # 后台心跳检查细则
 │   ├── memory/
-│   │   └── YYYY-MM-DD.md             # 每日原始记录：决策、进展、待办、教训
-│   ├── status.md                     # 当前状态快照
-│   └── context.md                    # 中期上下文和阶段背景
+│   │   └── YYYY-MM-DD.md             # 每日原始记录
+│   ├── status.md                     # 短期状态快照
+│   └── context.md                    # 中期项目上下文
 ├── 1-Inbox/                          # 临时收集区
 ├── 2-Projects/                       # 项目资料
 ├── 3-Thinking/                       # 思考、方案、草稿
@@ -120,32 +98,85 @@ my-workspace/
 └── 5-Archive/                        # 归档
 ```
 
-最重要的几层：
+几层记忆各自负责不同问题：
 
-- **`status.md`**：短期状态。Codex 用它快速知道“现在正在做什么”。
-- **`context.md`**：中期上下文。记录这段时间的项目主线和阶段判断。
-- **`memory/YYYY-MM-DD.md`**：每日记录。把当天发生的关键事实、决策、错误教训和待办写下来。
-- **`about-me/MEMORY.md`**：长期记忆。只沉淀稳定偏好、重要原则和长期结论。
+| 文件 | 负责什么 | 适合记录 |
+|---|---|---|
+| `0-System/status.md` | 短期状态 | 现在做到哪、当前阻塞、临时提醒 |
+| `0-System/context.md` | 中期上下文 | 本周/本阶段主线、项目判断、背景变化 |
+| `0-System/memory/YYYY-MM-DD.md` | 每日原始记录 | 当天事实、关键动作、错误教训、待办 |
+| `0-System/about-me/MEMORY.md` | 长期稳定记忆 | 用户偏好、长期原则、反复验证过的结论 |
 
-初始化时还可以注册一个 **Codex 每日记忆整理 automation**：每天定时唤醒 Codex，让模型按工作区规则读取这些文件，把重要信息补进 daily memory，并按需更新 `status.md` / `context.md` / `MEMORY.md`。
+推荐沉淀路径是：
 
-除此之外还有两类辅助入口：
+```text
+当天事实 -> daily memory -> status/context -> long-term MEMORY
+```
 
-- **安装提示词**：不想记命令时，直接把提示词丢给 Codex，让它帮你安装并回报 workspace 位置。
-- **飞书桥接**：需要消息入口时再打开；默认记忆系统不依赖飞书。
+也就是说，不要一上来把所有东西塞进长期记忆。先记录事实，再定期提炼。
+
+## 每日记忆整理
+
+初始化时可以注册一个 Codex automation：`codex-x 每日记忆整理`。
+
+它不是系统 cron，也不是偷偷跑一个摘要脚本，而是一条 Codex automation prompt：每天定时唤醒 Codex，让模型按工作区规则读写记忆文件。
+
+默认行为：
+
+- 读取 `AGENTS.md` / `CLAUDE.md`，遵守当前工作区规则。
+- 读取今天和昨天的 `0-System/memory/YYYY-MM-DD.md`。
+- 把重要信息写进当天 daily memory：关键决策、项目进展、资源变化、工具变化、错误教训、用户明确偏好、承诺过的待办。
+- 用可追溯摘要更新 `0-System/status.md`。
+- 阶段背景变化时更新 `0-System/context.md`。
+- 只有出现稳定偏好或长期结论时，才更新 `0-System/about-me/MEMORY.md`。
+
+交互式初始化会询问是否注册；`--yes` 和 `--answers` 默认启用。关闭它：
+
+```bash
+node ~/codex-x/bin/codex-x.mjs init --no-automation "$HOME/my-codex-workspace"
+```
+
+已有工作区补装：
+
+```bash
+node ~/codex-x/bin/codex-x.mjs automation install "$HOME/my-codex-workspace"
+```
+
+`digest` 仍然保留，但只作为手动调试/兜底工具：
+
+```bash
+node ~/codex-x/bin/codex-x.mjs digest "$HOME/my-codex-workspace" --write-status --write-context
+```
+
+## 能力模块
+
+当前大框架下只有几个明确模块，边界尽量清楚：
+
+| 模块 | 位置 | 作用 |
+|---|---|---|
+| Workspace Template | `packages/workspace-template` | 记忆优先的工作区骨架 |
+| Bootstrap CLI | `packages/create-codex-x` | 初始化工作区、归档 bootstrap、注册 automation |
+| Feishu Bridge CLI | `packages/feishu-codex-cli` | 可选，把飞书消息接到本地 Codex 工作区 |
+| Optional Skills | `skills/` | 可选能力包，不默认写入工作区模板 |
+
+更直接一点：
+
+- 只想让 Codex 有记忆：用默认初始化即可。
+- 想从飞书发消息驱动 Codex：再配置 `feishu-codex-cli`。
+- 想解锁插件或做异地访问：按需安装 `skills/` 里的能力包。
 
 ## 可选 Skills
 
-`codex-x` 也可以作为可分享 Codex skill 的来源仓库。仓库根目录的 `skills/` 是 opt-in 能力包，不会默认塞进 `workspace-template`。
+根目录 `skills/` 是可分享、可安装的 opt-in 能力区。默认工作区不会预装这些 skill，避免一开始就碰高风险配置。
 
-当前有两类：
+当前包含：
 
-| Skill | 解决什么 | 安全边界 |
+| Skill | 适用场景 | 边界 |
 |---|---|---|
 | `codex-plugin-unlock-zhuji` | 解锁 Codex App 插件，并让模型请求继续走筑基 Provider | 先备份 `auth.json/config.toml`，重启前给回滚命令 |
-| `codex-remote-access` | 异地访问 Codex 工作区，优先走飞书桥接、私有网络或可回滚 tunnel | 不默认公开暴露本地 Codex、工作区文件或凭据 |
+| `codex-remote-access` | 从异地、另一台设备或消息渠道访问 Codex 工作区 | 优先飞书桥接、私有网络或可回滚 tunnel，不默认公开暴露 |
 
-安装到本机 Codex：
+安装全部可选 skills：
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
@@ -165,16 +196,66 @@ chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/codex-plugin-unlock-zhuji/scripts/b
 
 更多说明见 [Skills](./docs/skills.md)。
 
-## 手动安装（如果你想自己控制每一步）
+## 飞书桥接
 
-### 1. 安装依赖
+飞书不是必需项。记忆系统可以独立运行。
+
+当你希望从飞书给本地 Codex 发消息时，再配置桥接：
 
 ```bash
-cd codex-x
-npm install
+node ~/codex-x/packages/feishu-codex-cli/bin/feishu-codex.mjs init --write-config
+node ~/codex-x/packages/feishu-codex-cli/bin/feishu-codex.mjs doctor
+node ~/codex-x/packages/feishu-codex-cli/bin/feishu-codex.mjs bridge smoke
 ```
 
-### 2. 初始化一个工作区
+可用命令包括：
+
+- `doctor`：检查本地依赖、配置和 Codex 工作区。
+- `smoke`：跑一条最小链路验证。
+- `start` / `stop` / `status` / `logs`：管理本地桥接进程。
+- `send`：从命令行发送一条测试消息。
+
+## 仓库结构
+
+```text
+codex-x/
+├── install.sh
+├── bin/
+│   └── codex-x.mjs
+├── packages/
+│   ├── workspace-template/
+│   ├── create-codex-x/
+│   └── feishu-codex-cli/
+├── skills/
+│   ├── codex-plugin-unlock-zhuji/
+│   └── codex-remote-access/
+├── docs/
+└── examples/
+```
+
+这样组织是为了让默认入口足够低门槛，同时保留扩展空间：
+
+- `packages/` 放产品主链路。
+- `skills/` 放用户明确需要时才安装的能力包。
+- `docs/` 放展开说明，README 只保留最短路径。
+- 后续增加新入口时，先作为独立模块出现；等边界稳定后再抽共享层。
+
+## 本地开发
+
+```bash
+git clone https://github.com/armysheng/codex-x.git
+cd codex-x
+npm install
+npm test
+```
+
+手动初始化一个测试工作区：
+
+```bash
+node ./bin/codex-x.mjs init ./tmp/my-workspace
+```
+
+使用 answers 文件做非交互初始化：
 
 ```bash
 node ./bin/codex-x.mjs init \
@@ -182,211 +263,22 @@ node ./bin/codex-x.mjs init \
   ./tmp/my-workspace
 ```
 
-如果后续把包发布出去，这条路径会收敛成：
-
-```bash
-npx create-codex-x my-workspace
-cd my-workspace
-codex
-```
-
-## 直接丢给 Codex
-
-如果你想让 Codex 直接帮你装，不想自己记命令，可以把下面这段原样丢给它：
-
-```text
-请帮我安装 codex-x：
-
-1. 执行：
-   bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
-2. 初始化完成后，告诉我安装后的 repo 目录、workspace 目录，以及是否注册了 Codex 每日记忆整理 automation。
-3. 提醒我下一步进入 workspace 后运行 `codex`。
-```
-
-如果你想走交互式初始化，把第 2 步换成：
-
-```text
-`node ./bin/codex-x.mjs init ./tmp/my-workspace`
-```
-
-### 3. 可选：接飞书桥接
-
-```bash
-node packages/feishu-codex-cli/bin/feishu-codex.mjs init --write-config
-node packages/feishu-codex-cli/bin/feishu-codex.mjs doctor
-node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge smoke
-```
-
-当前第一版的真实桥接主路径依赖：
-
-- `lark-cli` 已登录 profile
-- 本地可用的 `codex`
-- 一个存在的 `codexWorkdir`
-
-## 每天自动整理
-
-初始化完成后，`codex-x` 会自动注册一个 Codex automation：
-
-- 名称：`codex-x 每日记忆整理`
-- 时间：每天 `23:40`
-- 动作：定时唤醒 Codex，让模型直接读取工作区规则和记忆文件，整理重要信息，并回写 `daily memory` / `status.md` / `context.md`
-
-它的机制不是“偷偷跑一个系统脚本”，而是一条本地 Codex automation prompt：
-
-- 先读 `AGENTS.md` / `CLAUDE.md`，遵守工作区规则
-- 再读今天和昨天的 `0-System/memory/YYYY-MM-DD.md`
-- 把重要信息写进当天 daily memory：关键决策、项目进展、资源变化、工具变化、错误教训、用户明确偏好、承诺过的待办
-- 用可追溯摘要更新 `0-System/status.md`，阶段背景变化时更新 `0-System/context.md`
-- 只在稳定偏好或长期结论出现时更新 `0-System/about-me/MEMORY.md`
-
-交互式初始化会询问是否注册；一键安装、`--yes` 和 `--answers` 默认启用。若不想注册：
-
-```bash
-node ./bin/codex-x.mjs init --no-automation ./tmp/my-workspace
-```
-
-如果你已经有一个工作区，只想补装这条 Codex automation：
-
-```bash
-node ./bin/codex-x.mjs automation install ./tmp/my-workspace
-```
-
-`digest` 命令仍然保留，但它只是手动调试/兜底工具：
-
-```bash
-node ./bin/codex-x.mjs digest ./tmp/my-workspace --write-status --write-context
-```
-
-这会：
-
-- 读取最近两天的 `0-System/memory/*.md`
-- 生成一段 digest
-- 可选回写 `status.md`
-- 可选回写 `context.md`
-
-## 仓库结构
-
-项目刻意收成 3 个功能包：
-
-```text
-packages/
-├── workspace-template/
-├── create-codex-x/
-└── feishu-codex-cli/
-
-skills/
-├── codex-plugin-unlock-zhuji/
-└── codex-remote-access/
-```
-
-这样组织的目的很简单：
-
-- 顶层只表达现在真的存在的 3 个能力
-- 高风险或业务专用 skill 单独 opt-in，不污染默认工作区
-- 每个能力都能独立理解，不需要先懂整个平台
-- 以后要扩更多入口时，再从包内抽共享层，不提前过度设计
-
-## 适合谁
-
-- 想把 Codex 真正变成日常搭子的开发者
-- 想让 AI 记住项目上下文，但不想先搭一套数据库/平台的人
-- 想把本地工作区和飞书消息打通的人
-- 想复用一套可公开、可迁移、可扩展的 AI 工作区骨架的人
-
-## 典型场景
-
-- 你每天都在同一个仓库里和 Codex 协作，但不想每次重新解释背景
-- 你想让 AI 记住“这个项目现在推进到哪一步了”
-- 你想把“工作区里的上下文”和“消息入口”接起来，而不是把它们拆成两套系统
-- 你想先跑通最小闭环，再决定后面要不要做更重的平台化
-
-## 当前状态
-
-当前版本已经具备这些可验证能力：
-
-- 初始化器能生成完整工作区
-- `BOOTSTRAP` 会自动归档
-- Feishu CLI 具备配置、自检、起停、状态、日志和 smoke 检查
-- 全量测试已覆盖主链路
-
-## FAQ
-
-### 这是不是另一个 AI agent 平台？
-
-不是。它更像一个 **Codex 工作区工具箱**。
-
-重点不是“托管一切”，而是把这几件事做好：
-
-- 让工作区有记忆
-- 让初始化足够顺
-- 让消息入口能接进来
-
-### 我不用飞书，能用吗？
-
-可以。
-
-飞书 CLI 是可选模块。只想用记忆系统和初始化器，直接用：
-
-```bash
-node ./bin/codex-x.mjs init ...
-```
-
-就够了。
-
-### 为什么只保留 3 个模块？
-
-因为当前真正存在、而且用户真的会直接接触到的能力就 3 个：
-
-- `workspace-template`
-- `create-codex-x`
-- `feishu-codex-cli`
-
-先把这 3 个模块讲清楚、做好用，比一开始拆成很多抽象层更健康。
-
-### 这个项目现在最缺什么？
-
-最缺的是：
-
-- 一份更直观的 demo / GIF / screenshot
-- 一次真正的飞书消息端到端公开演示
-- 更平滑的安装路径（比如未来真正发布到 npm）
-
-## 验证
-
-```bash
-cd codex-x
-npm test
-node ./scripts/check-redactions.mjs
-```
-
-## 文档
+## 文档入口
 
 - [Getting Started](./docs/getting-started.md)
+- [Memory Model](./docs/memory-model.md)
 - [Codex Integration](./docs/codex-integration.md)
 - [Skills](./docs/skills.md)
-- [Memory Model](./docs/memory-model.md)
 - [Feishu Setup](./docs/feishu-setup.md)
 - [FAQ](./docs/faq.md)
 - [Positioning](./docs/positioning.md)
-- [Launch Kit](./docs/launch-kit.md)
-- [Promotion Kit](./docs/promotion-kit.md)
-- [Channel Posts](./docs/channel-posts.md)
-- [Final Posts](./docs/final-posts.md)
-- [First Week Checklist](./docs/first-week-checklist.md)
-- [Discussion Template](./docs/discussion-template.md)
-- [Metrics Tracker](./docs/metrics-tracker.md)
-- [Next Steps](./NEXT_STEPS.md)
-- [Screenshots Plan](./docs/screenshots.md)
-- [Final Launch Plan](./docs/final-launch-plan.md)
-- [Release Checklist](./docs/release-checklist.md)
-- [Contributing](./CONTRIBUTING.md)
 
 ## Roadmap
 
-- [ ] 真正跑通一次飞书消息 -> Codex -> 飞书回复的端到端链路
-- [ ] 把 `workspace-template` 继续瘦成更纯的最小骨架
-- [ ] 给 CLI 增加更友好的发布形态和安装路径
-- [ ] 补一份公开 demo / GIF / screenshots
+- 用真实截图替换 README 占位说明。
+- 把安装路径继续收敛成更自然的包发布形态。
+- 跑通并展示一次公开的飞书消息 -> Codex -> 飞书回复端到端演示。
+- 继续瘦身默认 workspace template，把高风险能力保持在 opt-in skills。
 
 ## License
 

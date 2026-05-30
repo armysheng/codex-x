@@ -1,5 +1,7 @@
 # codex-x
 
+简体中文 | [English](./README.en.md)
+
 [![GitHub stars](https://img.shields.io/github/stars/armysheng/codex-x?style=flat-square)](https://github.com/armysheng/codex-x/stargazers)
 [![GitHub release](https://img.shields.io/github/v/release/armysheng/codex-x?style=flat-square)](https://github.com/armysheng/codex-x/releases)
 [![License](https://img.shields.io/github/license/armysheng/codex-x?style=flat-square)](./LICENSE)

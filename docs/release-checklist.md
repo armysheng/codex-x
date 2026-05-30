@@ -29,4 +29,5 @@
 
 - [ ] 补 GitHub Topics
 - [ ] 补一句清晰的 repo description
+- [ ] 开启 GitHub Discussions
 - [ ] 发第一条介绍帖时强调“解决什么问题”，不要只讲实现

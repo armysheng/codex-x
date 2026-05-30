@@ -281,6 +281,7 @@ node ./scripts/check-redactions.mjs
 - [First Week Checklist](./docs/first-week-checklist.md)
 - [Discussion Template](./docs/discussion-template.md)
 - [Metrics Tracker](./docs/metrics-tracker.md)
+- [Next Steps](./NEXT_STEPS.md)
 - [Screenshots Plan](./docs/screenshots.md)
 - [Final Launch Plan](./docs/final-launch-plan.md)
 - [Release Checklist](./docs/release-checklist.md)

@@ -12,6 +12,7 @@
    - description
    - topics
    - release
+   - Discussions 是否已开启
 
 2. 准备发帖配图：
    - 首页总览图

@@ -9,6 +9,7 @@
 - [README.md](./README.md)
 - [docs/getting-started.md](./docs/getting-started.md)
 - [docs/codex-integration.md](./docs/codex-integration.md)
+- [docs/skills.md](./docs/skills.md)
 - [docs/feishu-setup.md](./docs/feishu-setup.md)
 
 ## 这个项目最欢迎的贡献
@@ -16,6 +17,7 @@
 - 把模板再收小一点，让默认工作区更干净
 - 改善初始化体验，让第一次上手更顺
 - 补更多 `doctor / smoke / send` 这类低门槛工具
+- 补可单独安装、可审计、不会默认污染工作区的 Codex skill，例如插件解锁、异地访问这类边界清晰的能力包
 - 提高飞书桥接的稳定性和可观测性
 - 写更清楚的文档、示例和演示
 
@@ -40,5 +42,7 @@ node ./scripts/check-redactions.mjs
 - `packages/workspace-template/`
 - `packages/create-codex-x/`
 - `packages/feishu-codex-cli/`
+
+仓库根目录的 `skills/` 是可选 skill 的发布位，不算第 4 个功能包；高风险或业务专用 skill 必须保持 opt-in，不要默认写入工作区模板。
 
 如果未来真的长出第 4、5 个功能，再考虑拆共享层。

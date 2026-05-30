@@ -78,7 +78,29 @@ codex
 - `0-System/context.md`
 - `0-System/memory/<today>.md`
 
-## 5. 如果要接飞书
+## 5. 可选：安装 Codex skill
+
+`codex-x` 的默认工作区不会自动带业务专用 skill。需要时可以从仓库根目录安装全部可选 skill：
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/* "${CODEX_HOME:-$HOME/.codex}/skills/"
+chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/codex-plugin-unlock-zhuji/scripts/backup_codex_state.sh"
+```
+
+然后新开一轮 Codex 对话：
+
+```text
+使用 $codex-plugin-unlock-zhuji 帮我安全解锁 Codex 插件，Provider 用筑基。
+```
+
+```text
+使用 $codex-remote-access 帮我安全配置 Codex 工作区的异地访问。
+```
+
+这类 skill 可能会修改本机 Codex 登录态、配置或网络暴露面，执行前必须先说明风险、备份或给出停止/回滚命令。
+
+## 6. 如果要接飞书
 
 ```bash
 cd ../../
@@ -97,7 +119,7 @@ node packages/feishu-codex-cli/bin/feishu-codex.mjs init --write-config
 node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge start
 ```
 
-## 6. 每天自动整理
+## 7. 每天自动整理
 
 默认初始化已经注册 Codex automation。如果你是已有工作区，或者想重建这条任务：
 

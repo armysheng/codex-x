@@ -14,12 +14,17 @@
 > 3. 给需要的人一个可选的飞书桥接入口
 > 4. 用 Codex automation 定时整理 daily memory
 >
-> 现在仓库里已经有：
-> - 一键安装脚本
-> - memory-first workspace template
-> - 初始化时可注册“每日记忆整理” automation：让 Codex 定时醒来，按工作区规则把重要信息写进 daily memory
-> - `doctor / smoke / start / stop / status / logs / send`
-> - `digest`：保留为手动调试/兜底工具
+> 记忆系统大概长这样：
+>
+> ```text
+> 0-System/
+> ├── about-me/        # 助手是谁、用户是谁、长期偏好
+> ├── memory/          # 每日记录：决策、进展、待办、教训
+> ├── status.md        # 当前状态快照
+> └── context.md       # 中期上下文和阶段背景
+> ```
+>
+> Codex 每次进工作区先读这些文件，工作过程中再把重要信息写回去。初始化时也可以注册“每日记忆整理” automation，让 Codex 定时醒来，把关键决策、项目进展、资源变化、错误教训和待办补进 daily memory。
 >
 > 不想自己记命令的话，可以直接把这段丢给 Codex：
 >

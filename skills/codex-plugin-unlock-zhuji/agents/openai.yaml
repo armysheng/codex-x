@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex 插件解锁（筑基）"
+  short_description: "安全解锁 Codex 插件并配置筑基 Provider"
+  default_prompt: "Use $codex-plugin-unlock-zhuji to safely unlock Codex App plugins with Zhuji provider."

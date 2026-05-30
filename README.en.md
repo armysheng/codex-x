@@ -69,6 +69,37 @@ Most AI coding setups are missing one important thing: durable project context.
 - `digest`
   Summarizes recent daily memory and can write back to `status.md` / `context.md`
 
+## Optional skills
+
+The repo can also host opt-in Codex skills under `skills/`. These skills are not copied into the default workspace template automatically.
+
+Current skills:
+
+| Skill | What it does | Safety boundary |
+|---|---|---|
+| `codex-plugin-unlock-zhuji` | Safely unlocks Codex App plugins while keeping model requests on a Zhuji provider | Back up `auth.json/config.toml` and show rollback before restart |
+| `codex-remote-access` | Plan remote access to a Codex workspace through Feishu bridge, private network, or reversible tunnel | Do not expose local Codex, workspace files, or credentials by default |
+
+Install it locally:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/* "${CODEX_HOME:-$HOME/.codex}/skills/"
+chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/codex-plugin-unlock-zhuji/scripts/backup_codex_state.sh"
+```
+
+Then ask Codex:
+
+```text
+Use $codex-plugin-unlock-zhuji to safely unlock Codex App plugins with Zhuji provider.
+```
+
+```text
+Use $codex-remote-access to safely set up remote access to my Codex workspace.
+```
+
+See [Skills](./docs/skills.md) for details.
+
 ## Quick manual setup
 
 ```bash
@@ -123,6 +154,10 @@ packages/
 ├── workspace-template/
 ├── create-codex-x/
 └── feishu-codex-cli/
+
+skills/
+├── codex-plugin-unlock-zhuji/
+└── codex-remote-access/
 ```
 
 The point is not to look “architecturally impressive”.
@@ -132,6 +167,7 @@ The point is to keep the top-level understandable and let the project grow from 
 
 - [Getting Started](./docs/getting-started.md)
 - [Codex Integration](./docs/codex-integration.md)
+- [Skills](./docs/skills.md)
 - [Memory Model](./docs/memory-model.md)
 - [Feishu Setup](./docs/feishu-setup.md)
 - [FAQ](./docs/faq.md)

@@ -88,43 +88,79 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 - **想快速装起来**：用 `create-codex-x`
 - **想把飞书接进来**：再加 `feishu-codex-cli`
 
-当前 `feishu-codex-cli` 已支持：
+## 记忆系统长什么样
 
-- `init`
-- `doctor`
-- `bridge start`
-- `bridge status`
-- `bridge logs`
-- `bridge stop`
-- `bridge smoke`
-- `send`
+`codex-x` 的核心不是命令集合，而是一套给 Codex 读写的本地记忆结构。
 
-另外，`create-codex-x` 现在还带了一个很实用的能力：
+它把“我是谁”“用户是谁”“项目现在到哪一步”“今天发生了什么”“哪些结论值得长期保留”拆成不同层级的文件。Codex 每次进入工作区时先读这些文件，工作中再把重要信息写回去。
 
-- `digest`
-  用来整理今天/昨天的 daily memory，并可选回写 `status.md` / `context.md`
+默认目录大概是这样：
+
+```text
+my-workspace/
+├── AGENTS.md                         # Codex 进入工作区时先读的总规则
+├── CLAUDE.md                         # 兼容 Claude Code 的入口规则
+├── 0-System/
+│   ├── about-me/
+│   │   ├── README.md                 # 说明这些身份/记忆文件怎么用
+│   │   ├── SOUL.md                   # 助手的气质、判断方式、说话风格
+│   │   ├── USER.md                   # 用户称呼、偏好、背景
+│   │   ├── IDENTITY.md               # 助手自己的名字和身份
+│   │   ├── MEMORY.md                 # 长期稳定记忆
+│   │   ├── TOOLS.md                  # 本地工具、账号、环境说明
+│   │   └── HEARTBEAT.md              # 心跳/后台检查规则
+│   ├── memory/
+│   │   └── YYYY-MM-DD.md             # 每日原始记录：决策、进展、待办、教训
+│   ├── status.md                     # 当前状态快照
+│   └── context.md                    # 中期上下文和阶段背景
+├── 1-Inbox/                          # 临时收集区
+├── 2-Projects/                       # 项目资料
+├── 3-Thinking/                       # 思考、方案、草稿
+├── 4-Assets/                         # 资源、账号、服务、资产清单
+└── 5-Archive/                        # 归档
+```
+
+最重要的几层：
+
+- **`status.md`**：短期状态。Codex 用它快速知道“现在正在做什么”。
+- **`context.md`**：中期上下文。记录这段时间的项目主线和阶段判断。
+- **`memory/YYYY-MM-DD.md`**：每日记录。把当天发生的关键事实、决策、错误教训和待办写下来。
+- **`about-me/MEMORY.md`**：长期记忆。只沉淀稳定偏好、重要原则和长期结论。
+
+初始化时还可以注册一个 **Codex 每日记忆整理 automation**：每天定时唤醒 Codex，让模型按工作区规则读取这些文件，把重要信息补进 daily memory，并按需更新 `status.md` / `context.md` / `MEMORY.md`。
+
+除此之外还有两类辅助入口：
+
+- **安装提示词**：不想记命令时，直接把提示词丢给 Codex，让它帮你安装并回报 workspace 位置。
+- **飞书桥接**：需要消息入口时再打开；默认记忆系统不依赖飞书。
 
 ## 可选 Skills
 
-`codex-x` 现在也可以作为可分享 Codex skill 的来源仓库。仓库根目录的 `skills/` 只放 opt-in skill，不会默认塞进 `workspace-template`。
+`codex-x` 也可以作为可分享 Codex skill 的来源仓库。仓库根目录的 `skills/` 是 opt-in 能力包，不会默认塞进 `workspace-template`。
 
-当前已有：
+当前有两类：
 
-- `skills/codex-plugin-unlock-zhuji/`
-  安全解锁 Codex App 插件，并把模型请求配置到筑基 Provider。它会强制先备份 `auth.json/config.toml`，重启前必须给用户回滚命令。
+| Skill | 解决什么 | 安全边界 |
+|---|---|---|
+| `codex-plugin-unlock-zhuji` | 解锁 Codex App 插件，并让模型请求继续走筑基 Provider | 先备份 `auth.json/config.toml`，重启前给回滚命令 |
+| `codex-remote-access` | 异地访问 Codex 工作区，优先走飞书桥接、私有网络或可回滚 tunnel | 不默认公开暴露本地 Codex、工作区文件或凭据 |
 
 安装到本机 Codex：
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R skills/codex-plugin-unlock-zhuji "${CODEX_HOME:-$HOME/.codex}/skills/"
+cp -R skills/* "${CODEX_HOME:-$HOME/.codex}/skills/"
 chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/codex-plugin-unlock-zhuji/scripts/backup_codex_state.sh"
 ```
 
-用法：
+触发示例：
 
 ```text
 使用 $codex-plugin-unlock-zhuji 帮我安全解锁 Codex 插件，Provider 用筑基。
+```
+
+```text
+使用 $codex-remote-access 帮我安全配置 Codex 工作区的异地访问。
 ```
 
 更多说明见 [Skills](./docs/skills.md)。
@@ -239,7 +275,8 @@ packages/
 └── feishu-codex-cli/
 
 skills/
-└── codex-plugin-unlock-zhuji/
+├── codex-plugin-unlock-zhuji/
+└── codex-remote-access/
 ```
 
 这样组织的目的很简单：

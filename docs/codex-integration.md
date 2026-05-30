@@ -5,6 +5,7 @@
 - Codex 进入工作区时应优先读取哪些文件
 - 初始化后哪些文件最常被用户维护
 - 初始化如何注册 Codex automation 做每日记忆整理
+- 可选 Codex skill 如何安装和触发
 - 飞书桥接如何把消息注入本地 Codex thread
 
 第一版会以 `packages/workspace-template/` 中的读取顺序为准。
@@ -68,3 +69,32 @@ Codex 仍然在本地工作区里读取和更新记忆文件。
 ```bash
 node ./bin/codex-x.mjs automation install <workspace>
 ```
+
+## 可选 Codex skills
+
+`packages/workspace-template/skills/` 是用户工作区里的扩展位，默认不预装业务专用 skill。
+
+仓库根目录的 `skills/` 是发布和分享位。当前包含：
+
+- `codex-plugin-unlock-zhuji`：安全解锁 Codex App 插件并配置筑基 Provider。
+- `codex-remote-access`：安全规划异地访问，优先走飞书桥接、私有网络或可回滚 tunnel。
+
+安装到本机 Codex：
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/* "${CODEX_HOME:-$HOME/.codex}/skills/"
+chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/codex-plugin-unlock-zhuji/scripts/backup_codex_state.sh"
+```
+
+触发方式：
+
+```text
+使用 $codex-plugin-unlock-zhuji 帮我安全解锁 Codex 插件，Provider 用筑基。
+```
+
+```text
+使用 $codex-remote-access 帮我安全配置 Codex 工作区的异地访问。
+```
+
+这类 skill 的原则是 opt-in：让用户明确安装、明确触发，不在初始化阶段自动改动 `~/.codex/auth.json`、`~/.codex/config.toml` 或网络暴露面。

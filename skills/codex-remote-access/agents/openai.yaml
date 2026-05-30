@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex 异地访问"
+  short_description: "安全配置 Codex 工作区的远程访问或消息入口"
+  default_prompt: "Use $codex-remote-access to safely set up remote access to my Codex workspace."

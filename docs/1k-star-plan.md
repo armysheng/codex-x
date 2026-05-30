@@ -143,7 +143,7 @@ automation
 
 ## 当前最缺
 
-- 真实截图或 GIF；
-- 一个 60 秒安装演示；
+- 基于 `npm run demo` 截一组真实终端图；
+- 一个 60 秒安装演示 GIF；
 - 一次飞书消息 -> Codex -> 飞书回复的端到端公开演示；
 - npm 发布后的 `npx create-codex-x` 入口。

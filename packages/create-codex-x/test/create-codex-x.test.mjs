@@ -46,6 +46,34 @@ test("bootstrap writes user files, first memory, and archives BOOTSTRAP", () => 
   assert.equal(existsSync(path.join(targetDir, "5-Archive/bootstrap/BOOTSTRAP-2026-05-28.md")), true);
 });
 
+test("bootstrap uses the local calendar date for daily memory", () => {
+  const originalTZ = process.env.TZ;
+  process.env.TZ = "Asia/Shanghai";
+  try {
+    const tempRoot = mkdtempSync(path.join(tmpdir(), "codex-x-local-date-"));
+    const targetDir = path.join(tempRoot, "workspace");
+    copyTemplate(templateDir, targetDir);
+    const answers = normalizeAnswers({
+      ownerName: "Alex",
+      assistantName: "Xiao X",
+      language: "中文"
+    });
+
+    applyBootstrap(targetDir, answers, new Date("2026-05-30T16:30:00Z"), {
+      registerCodexAutomation: false
+    });
+
+    assert.equal(existsSync(path.join(targetDir, "0-System/memory/2026-05-31.md")), true);
+    assert.equal(existsSync(path.join(targetDir, "5-Archive/bootstrap/BOOTSTRAP-2026-05-31.md")), true);
+  } finally {
+    if (originalTZ === undefined) {
+      delete process.env.TZ;
+    } else {
+      process.env.TZ = originalTZ;
+    }
+  }
+});
+
 test("bootstrap registers a Codex daily memory automation", () => {
   const tempRoot = mkdtempSync(path.join(tmpdir(), "codex-x-automation-"));
   const targetDir = path.join(tempRoot, "workspace");

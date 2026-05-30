@@ -251,6 +251,12 @@ npm install
 npm test
 ```
 
+生成一段适合截图的真实 demo：
+
+```bash
+npm run demo
+```
+
 手动初始化一个测试工作区：
 
 ```bash
@@ -272,6 +278,7 @@ node ./bin/codex-x.mjs init \
 - [Codex Integration](./docs/codex-integration.md)
 - [Skills](./docs/skills.md)
 - [Feishu Setup](./docs/feishu-setup.md)
+- [Demo](./docs/demo.md)
 - [FAQ](./docs/faq.md)
 - [Positioning](./docs/positioning.md)
 - [1k Star Plan](./docs/1k-star-plan.md)

@@ -2,6 +2,14 @@
 
 当前 README 暂时不放占位 SVG。后续补图时优先使用真实运行截图或 GIF。
 
+先跑：
+
+```bash
+npm run demo
+```
+
+这会生成真实 CLI 输出，适合直接截终端图。详见 [Demo](./demo.md)。
+
 如果要继续提升 star 转化，建议按这个顺序补 4 张图：
 
 ## 1. README 第一屏截图
@@ -19,9 +27,10 @@
 ## 2. 一键安装截图
 内容建议：
 
-- 终端执行 `bash <(curl ...)`
-- 输出 `codex-x installed successfully`
-- 显示 repo 路径和 workspace 路径
+- 终端执行 `npm run demo`
+- 输出 `Initialized codex-x workspace`
+- 输出 `Registered Codex automation`
+- 显示 workspace 路径和 automation 路径
 
 目的：
 

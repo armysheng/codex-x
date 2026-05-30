@@ -50,6 +50,6 @@
 
 1. 安装失败或安装说明不清楚。
 2. README 理解成本。
-3. 真实截图 / GIF 缺失。
+3. 用 `npm run demo` 截真实终端图，补 README 或发布帖。
 4. daily memory automation 机制不清楚。
 5. 飞书桥接门槛过高。

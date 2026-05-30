@@ -40,7 +40,7 @@ export async function runRootCli(argv = [], deps = {}) {
     process.stdout.write(
       [
         "Usage:",
-        "  codex-x init [--yes] [--answers file.json] <target-dir>",
+        "  codex-x init [--yes] [--answers file.json] [--no-automation] <target-dir>",
         "  codex-x automation install [target-dir]",
         "  codex-x digest [target-dir] [--today YYYY-MM-DD] [--write-status] [--write-context]",
         "  codex-x doctor",

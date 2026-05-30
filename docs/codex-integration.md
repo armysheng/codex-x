@@ -45,7 +45,7 @@ Codex 仍然在本地工作区里读取和更新记忆文件。
 
 ## Codex automation
 
-`codex-x init` 会写入一条本地 Codex automation：
+`codex-x init` 可以写入一条本地 Codex automation。交互式初始化会询问用户是否注册；`--yes` 和 `--answers` 默认注册；`--no-automation` 可关闭。
 
 - `id`: `codex-x-memory-digest`
 - `name`: `codex-x 每日记忆整理`

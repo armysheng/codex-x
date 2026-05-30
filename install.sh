@@ -9,11 +9,12 @@ TARGET_DIR="$DEFAULT_TARGET_DIR"
 WORKSPACE_DIR="$DEFAULT_WORKSPACE_DIR"
 ANSWERS_FILE=""
 YES=0
+NO_AUTOMATION=0
 
 usage() {
   cat <<'USAGE'
 Usage:
-  ./install.sh [--target DIR] [--workspace DIR] [--answers FILE] [--yes]
+  ./install.sh [--target DIR] [--workspace DIR] [--answers FILE] [--yes] [--no-automation]
 
 Examples:
   ./install.sh
@@ -39,6 +40,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --yes)
       YES=1
+      shift
+      ;;
+    --no-automation)
+      NO_AUTOMATION=1
       shift
       ;;
     -h|--help|help)
@@ -80,6 +85,9 @@ if [[ -n "$ANSWERS_FILE" ]]; then
 elif [[ "$YES" -eq 1 ]]; then
   INIT_ARGS+=(--yes)
 fi
+if [[ "$NO_AUTOMATION" -eq 1 ]]; then
+  INIT_ARGS+=(--no-automation)
+fi
 
 node ./bin/codex-x.mjs init "${INIT_ARGS[@]}" "$WORKSPACE_DIR"
 
@@ -95,6 +103,6 @@ Next:
   codex
 
 Codex automation:
-  每日记忆整理已注册到本机 Codex automation。
+  默认会注册每日记忆整理；如本次使用 --no-automation，则不会注册。
   如需重建：node "$TARGET_DIR/bin/codex-x.mjs" automation install "$WORKSPACE_DIR"
 EOF

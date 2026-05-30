@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, mkdtempSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { applyBootstrap } from "../src/bootstrap.mjs";
@@ -100,6 +100,50 @@ test("automation install registers Codex digest automation for an existing works
   );
   assert.match(automation, /name = "codex-x 每日记忆整理"/);
   assert.match(automation, new RegExp(escapeRegExp(`cwds = ["${targetDir}"]`)));
+});
+
+test("init can skip Codex automation when disabled by flag", async () => {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), "codex-x-no-automation-"));
+  const targetDir = path.join(tempRoot, "workspace");
+  const codexHome = path.join(tempRoot, ".codex");
+
+  await main(["--yes", "--no-automation", targetDir], {
+    codexHome,
+    repoRoot,
+    nowMs: 1779955200000
+  });
+
+  assert.equal(
+    existsSync(path.join(codexHome, "automations", "codex-x-memory-digest", "automation.toml")),
+    false
+  );
+});
+
+test("answers file can disable Codex automation", async () => {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), "codex-x-answers-no-automation-"));
+  const targetDir = path.join(tempRoot, "workspace");
+  const codexHome = path.join(tempRoot, ".codex");
+  const answersPath = path.join(tempRoot, "answers.json");
+  writeFileSync(
+    answersPath,
+    JSON.stringify({
+      ownerName: "Alex",
+      assistantName: "Xiao X",
+      language: "中文",
+      registerCodexAutomation: false
+    })
+  );
+
+  await main(["--answers", answersPath, targetDir], {
+    codexHome,
+    repoRoot,
+    nowMs: 1779955200000
+  });
+
+  assert.equal(
+    existsSync(path.join(codexHome, "automations", "codex-x-memory-digest", "automation.toml")),
+    false
+  );
 });
 
 function escapeRegExp(value) {

@@ -1,7 +1,7 @@
 {
   "name": "codex-x",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Memory-first Codex workspace template, bootstrapper, and optional Feishu bridge.",
   "type": "module",
   "bin": {

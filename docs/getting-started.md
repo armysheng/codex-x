@@ -20,6 +20,12 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 - 初始化默认工作区
 - 注册 Codex automation：每天整理最近两天的记忆并回写 `status/context`
 
+不想注册自动整理任务时，可以加：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh) --no-automation
+```
+
 ## 2. 手动安装（如果你想自己控制每一步）
 
 ```bash
@@ -35,7 +41,13 @@ node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./
 
 如果不带 `--answers`，初始化器会进入交互式问答。
 
-初始化会同时注册一条 Codex automation：`codex-x 每日记忆整理`。它每天 `23:40` 在该工作区执行记忆整理。
+交互式初始化会询问是否注册 Codex automation；`--yes` 和 `--answers` 默认注册。它每天 `23:40` 在该工作区执行记忆整理。
+
+如果这次不想注册：
+
+```bash
+node ./bin/codex-x.mjs init --no-automation ./tmp/my-workspace
+```
 
 也可以这样：
 

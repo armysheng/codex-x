@@ -169,6 +169,12 @@ node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge smoke
 - 时间：每天 `23:40`
 - 动作：整理最近两天的 daily memory，并回写 `status.md` / `context.md`
 
+交互式初始化会询问是否注册；一键安装、`--yes` 和 `--answers` 默认启用。若不想注册：
+
+```bash
+node ./bin/codex-x.mjs init --no-automation ./tmp/my-workspace
+```
+
 如果你已经有一个工作区，只想补装这条 Codex automation：
 
 ```bash

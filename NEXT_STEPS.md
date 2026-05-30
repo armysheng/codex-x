@@ -1,49 +1,55 @@
 # Next Steps
 
-如果你准备开始真正冲 star，先做这几件事：
+如果目标是把 `codex-x` 推到 1k stars，下一步不要继续堆功能，先把“能被理解、能被试用、能被传播”这条链路跑顺。
 
-## 1. 先发第一条中文主贴
+## 1. 先检查 GitHub 基础面
 
-直接用：
+- Repo description 是否清楚。
+- Topics 是否覆盖 `codex` / `openai-codex` / `ai-agents` / `local-first` / `memory`。
+- README 第一屏是否能看到一条命令安装和项目定位。
+- Issues / Discussions / Releases 是否可用。
 
-- `docs/final-posts.md`
+具体建议见 [1k Star Plan](./docs/1k-star-plan.md)。
 
-里的 **中文主贴（推荐最先发）**
+## 2. 发第一条中文主贴
 
-## 2. 开启 GitHub Discussions
+直接用 [Final Posts](./docs/final-posts.md) 里的 **中文主贴（推荐最先发）**。
 
-然后用：
+主线只讲一个问题：
 
-- `docs/discussion-template.md`
+> Codex 很强，但新会话容易失忆。`codex-x` 给它一个 memory-first 的本地工作区。
 
-里的欢迎贴模板发第一条 discussion。
+## 3. 开 GitHub Discussion 承接反馈
 
-## 3. 发英文短帖
+用 [Discussion Template](./docs/discussion-template.md) 里的欢迎帖模板。
 
-还是用：
+目标不是“显得热闹”，而是让第一批用户知道可以在哪里提安装问题、记忆系统建议和飞书桥接反馈。
 
-- `docs/final-posts.md`
+## 4. 发英文短帖
 
-里的 X / Twitter 版本。
+用 [Final Posts](./docs/final-posts.md) 里的 X / Twitter 版本。
 
-## 4. 观察 24 小时数据
+英文传播先强调：
 
-用：
+- durable project context；
+- local-first memory；
+- one-command install；
+- prompt-native daily memory automation。
 
-- `docs/metrics-tracker.md`
+## 5. 观察 24 小时数据
 
-记录：
+用 [Metrics Tracker](./docs/metrics-tracker.md) 记录：
 
-- stars
-- traffic
-- 常见问题
-- 反馈点
+- stars；
+- traffic；
+- 安装失败点；
+- 常见问题；
+- 用户是否能复述项目定位。
 
-## 5. 决定第一轮迭代
+## 6. 第一轮迭代优先级
 
-优先级建议：
-
-1. 安装问题
-2. 首页理解成本
-3. 截图 / GIF 不清楚
-4. `digest` 或飞书桥接理解成本
+1. 安装失败或安装说明不清楚。
+2. README 理解成本。
+3. 真实截图 / GIF 缺失。
+4. daily memory automation 机制不清楚。
+5. 飞书桥接门槛过高。

@@ -78,9 +78,12 @@ codex
 - `0-System/context.md`
 - `0-System/memory/<today>.md`
 
-## 5. 可选：安装 Codex skill
+## 5. 安装解锁插件 skill 和移动端访问 skill
 
-`codex-x` 的默认工作区不会自动带业务专用 skill。需要时可以从仓库根目录安装全部可选 skill：
+`codex-x` 的默认工作区不会自动带会改登录态或网络入口的 skill。需要时可以从仓库根目录安装这两个明确能力：
+
+- 解锁插件 skill：`codex-plugin-unlock-zhuji`
+- 移动端访问 skill：`codex-remote-access`
 
 ```bash
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
@@ -95,7 +98,7 @@ chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/codex-plugin-unlock-zhuji/scripts/b
 ```
 
 ```text
-使用 $codex-remote-access 帮我安全配置 Codex 工作区的异地访问。
+使用 $codex-remote-access 帮我安全配置 Codex 工作区的移动端访问。
 ```
 
 这类 skill 可能会修改本机 Codex 登录态、配置或网络暴露面，执行前必须先说明风险、备份或给出停止/回滚命令。

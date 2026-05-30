@@ -9,8 +9,8 @@
 > 它不是又一个“大而全 AI 平台”，而是先把 4 件事做好：
 > 1. 给 Codex 一个能长期记住上下文的工作区
 > 2. 给用户一条命令就能装起来的初始化器
-> 3. 给需要的人一个可选的飞书桥接入口
-> 4. 用 Codex automation 定时整理 daily memory
+> 3. 用 Codex automation 定时整理 daily memory
+> 4. 给需要的人解锁插件 skill 和移动端访问 skill
 >
 > 记忆系统大概长这样：
 >
@@ -28,10 +28,10 @@
 >
 > ```text
 > 请帮我安装 codex-x：
-> 1. 执行：
->    bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
-> 2. 初始化完成后，告诉我 repo 目录、workspace 目录，以及是否注册了 Codex 每日记忆整理 automation。
-> 3. 提醒我下一步进入 workspace 后运行 codex。
+> 请执行：
+> bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
+>
+> 安装完成后告诉我 repo 目录、workspace 目录，以及是否注册了“每日记忆整理”Codex automation。最后提醒我进入 workspace 后运行 codex。
 > ```
 >
 > GitHub：
@@ -47,6 +47,8 @@
 > - a memory-first workspace
 > - one-command install
 > - an optional Feishu bridge
+> - a plugin unlock skill
+> - a mobile access skill
 > - a prompt-native daily memory automation
 >
 > Not a giant AI platform.
@@ -80,9 +82,10 @@
 > 目前仓库里已经有：
 >
 > - 一键安装脚本
-> - README 首页展示图
-> - `doctor / smoke / start / stop / status / logs / send`
 > - 一段可直接丢给 Codex 的安装提示词
+> - 记忆系统目录结构说明
+> - 初始化时可注册每日记忆整理 automation
+> - 解锁插件 skill 和移动端访问 skill
 > - `npm test` 和脱敏检查
 >
 > GitHub：
@@ -98,6 +101,8 @@
 > - a memory-first workspace template for Codex
 > - a bootstrapper that installs and initializes the workspace
 > - an optional Feishu CLI bridge
+> - a plugin unlock skill
+> - a mobile access skill
 > - a prompt-native Codex automation for writing important context into daily memory
 >
 > The goal is not to become a giant platform.

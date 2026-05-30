@@ -1,15 +1,15 @@
 ---
 name: codex-remote-access
-description: Use when a user wants to access or operate a Codex workspace from another device, network, city, or remote message channel; set up remote access through Feishu bridge, SSH tunnel, Tailscale, Cloudflare Tunnel, reverse proxy, or a similar path while avoiding unsafe public exposure of local Codex, workspace files, or credentials.
+description: Use when a user wants to access or operate a Codex workspace from a phone, tablet, another device, or a remote message channel; set up mobile-friendly access through Feishu bridge, SSH tunnel, Tailscale, Cloudflare Tunnel, reverse proxy, or a similar path while avoiding unsafe public exposure of local Codex, workspace files, or credentials.
 ---
 
-# Codex Remote Access
+# Codex Mobile Access
 
 ## Core Rule
 
 Do not expose a local Codex workspace, app server, bridge endpoint, token, or filesystem path to the public internet by default. Prefer private, authenticated, reversible access paths.
 
-## Decide the Access Mode
+## Decide the Mobile Access Mode
 
 Use the smallest surface that solves the user's need:
 
@@ -33,7 +33,7 @@ Use the smallest surface that solves the user's need:
 
 ## Feishu Bridge Path
 
-For message-based remote access, keep the flow inside the existing bridge:
+For message-based mobile access, keep the flow inside the existing bridge:
 
 ```bash
 node packages/feishu-codex-cli/bin/feishu-codex.mjs init --write-config

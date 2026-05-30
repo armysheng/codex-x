@@ -275,6 +275,7 @@ node ./scripts/check-redactions.mjs
 - [Launch Kit](./docs/launch-kit.md)
 - [Channel Posts](./docs/channel-posts.md)
 - [Screenshots Plan](./docs/screenshots.md)
+- [Final Launch Plan](./docs/final-launch-plan.md)
 - [Release Checklist](./docs/release-checklist.md)
 - [Contributing](./CONTRIBUTING.md)
 

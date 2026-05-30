@@ -4,6 +4,7 @@ node_modules
 .env.*
 .codex-x
 .codex-permission-check
+template
 *.log
 tmp
 dist

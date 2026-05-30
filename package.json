@@ -14,7 +14,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "test": "npm run test --workspaces --if-present",
+    "test": "node --test ./test/root-cli.test.mjs && npm run test --workspaces --if-present",
     "lint:names": "node ./scripts/check-redactions.mjs",
     "init:workspace": "node ./bin/codex-x.mjs init"
   }

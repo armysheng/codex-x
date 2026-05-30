@@ -1,34 +1,8 @@
 #!/usr/bin/env node
 
-import { main as createWorkspace } from "../packages/create-codex-x/src/index.mjs";
+import { runRootCli } from "./root-cli.mjs";
 
-const argv = process.argv.slice(2);
-const [command = "help", ...rest] = argv;
-
-if (command === "init") {
-  createWorkspace(rest).catch((error) => {
-    console.error(error instanceof Error ? error.message : String(error));
-    process.exit(1);
-  });
-} else if (command === "digest") {
-  createWorkspace(["digest", ...rest]).catch((error) => {
-    console.error(error instanceof Error ? error.message : String(error));
-    process.exit(1);
-  });
-} else if (command === "help" || command === "--help" || command === "-h") {
-  process.stdout.write(
-    [
-      "Usage:",
-      "  codex-x init [--yes] [--answers file.json] <target-dir>",
-      "  codex-x digest [target-dir] [--today YYYY-MM-DD] [--write-status] [--write-context]",
-      "",
-      "Examples:",
-      "  codex-x init my-workspace",
-      "  codex-x init --answers examples/bootstrap.answers.example.json ./tmp/my-workspace",
-      "  codex-x digest ./tmp/my-workspace --write-status --write-context"
-    ].join("\n") + "\n"
-  );
-} else {
-  console.error(`Unknown command: ${command}`);
+runRootCli(process.argv.slice(2)).catch((error) => {
+  console.error(error instanceof Error ? error.message : String(error));
   process.exit(1);
-}
+});

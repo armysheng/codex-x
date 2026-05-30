@@ -52,32 +52,32 @@
 
 ### “现在最推荐先体验什么？”
 
-> 先跑一条命令安装，再看 `doctor / digest`。这样最快能感受到项目的核心价值。
+> 先把安装提示词丢给 Codex，再看生成出来的工作区和每日记忆整理 automation。这样最快能感受到项目的核心价值。
 
 ## 如果只发一条英文帖
 
-> Built an open-source toolkit for Codex: `codex-x`.  
->  
+> Built an open-source toolkit for Codex: `codex-x`.
+>
 > It gives you:
 > - a memory-first local workspace
 > - one-command install
 > - an optional Feishu bridge
-> - a small daily digest command for recent memory
->  
-> Not another giant AI platform.  
-> Just a practical local Codex workspace you can actually use.  
->  
+> - prompt-native daily memory automation
+>
+> Not another giant AI platform.
+> Just a practical local Codex workspace you can actually use.
+>
 > https://github.com/armysheng/codex-x
 
 ## 如果只发一条中文帖
 
-> 我把自己平时给 Codex 用的工作区骨架整理成了一个开源项目：`codex-x`。  
->  
-> 它不是又一个“大而全 AI 平台”，而是先把 4 件事做好：  
-> 1. 给 Codex 一个能长期记住上下文的工作区  
-> 2. 给用户一条命令就能装起来的初始化器  
-> 3. 给需要的人一个可选的飞书桥接入口  
-> 4. 给 daily memory 一个最小可用的自动整理命令  
->  
-> GitHub：  
+> 我把自己平时给 Codex 用的工作区骨架整理成了一个开源项目：`codex-x`。
+>
+> 它不是又一个“大而全 AI 平台”，而是先把 4 件事做好：
+> 1. 给 Codex 一个能长期记住上下文的工作区
+> 2. 给用户一条命令就能装起来的初始化器
+> 3. 给需要的人一个可选的飞书桥接入口
+> 4. 用 Codex automation 定时整理 daily memory
+>
+> GitHub：
 > https://github.com/armysheng/codex-x

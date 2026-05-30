@@ -104,6 +104,31 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 - `digest`
   用来整理今天/昨天的 daily memory，并可选回写 `status.md` / `context.md`
 
+## 可选 Skills
+
+`codex-x` 现在也可以作为可分享 Codex skill 的来源仓库。仓库根目录的 `skills/` 只放 opt-in skill，不会默认塞进 `workspace-template`。
+
+当前已有：
+
+- `skills/codex-plugin-unlock-zhuji/`
+  安全解锁 Codex App 插件，并把模型请求配置到筑基 Provider。它会强制先备份 `auth.json/config.toml`，重启前必须给用户回滚命令。
+
+安装到本机 Codex：
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/codex-plugin-unlock-zhuji "${CODEX_HOME:-$HOME/.codex}/skills/"
+chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/codex-plugin-unlock-zhuji/scripts/backup_codex_state.sh"
+```
+
+用法：
+
+```text
+使用 $codex-plugin-unlock-zhuji 帮我安全解锁 Codex 插件，Provider 用筑基。
+```
+
+更多说明见 [Skills](./docs/skills.md)。
+
 ## 手动安装（如果你想自己控制每一步）
 
 ### 1. 安装依赖
@@ -134,11 +159,12 @@ codex
 如果你想让 Codex 直接帮你装，不想自己记命令，可以把下面这段原样丢给它：
 
 ```text
-请在当前仓库根目录执行：
+请帮我安装 codex-x：
 
-1. `bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)`
-2. 告诉我安装后的 repo 目录和 workspace 目录
-3. 提醒我下一步进入 workspace 后运行 `codex`
+1. 执行：
+   bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
+2. 初始化完成后，告诉我安装后的 repo 目录、workspace 目录，以及是否注册了 Codex 每日记忆整理 automation。
+3. 提醒我下一步进入 workspace 后运行 `codex`。
 ```
 
 如果你想走交互式初始化，把第 2 步换成：
@@ -211,11 +237,15 @@ packages/
 ├── workspace-template/
 ├── create-codex-x/
 └── feishu-codex-cli/
+
+skills/
+└── codex-plugin-unlock-zhuji/
 ```
 
 这样组织的目的很简单：
 
 - 顶层只表达现在真的存在的 3 个能力
+- 高风险或业务专用 skill 单独 opt-in，不污染默认工作区
 - 每个能力都能独立理解，不需要先懂整个平台
 - 以后要扩更多入口时，再从包内抽共享层，不提前过度设计
 
@@ -296,6 +326,7 @@ node ./scripts/check-redactions.mjs
 
 - [Getting Started](./docs/getting-started.md)
 - [Codex Integration](./docs/codex-integration.md)
+- [Skills](./docs/skills.md)
 - [Memory Model](./docs/memory-model.md)
 - [Feishu Setup](./docs/feishu-setup.md)
 - [FAQ](./docs/faq.md)

@@ -12,7 +12,7 @@
 > - a memory-first workspace template
 > - a one-command bootstrap path
 > - an optional Feishu bridge
-> - a small daily digest command for recent memory
+> - prompt-native daily memory automation
 >  
 > If you're trying it, I’d love to know:
 >  

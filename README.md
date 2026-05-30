@@ -276,6 +276,8 @@ node ./scripts/check-redactions.mjs
 - [Positioning](./docs/positioning.md)
 - [Launch Kit](./docs/launch-kit.md)
 - [Channel Posts](./docs/channel-posts.md)
+- [Final Posts](./docs/final-posts.md)
+- [First Week Checklist](./docs/first-week-checklist.md)
 - [Screenshots Plan](./docs/screenshots.md)
 - [Final Launch Plan](./docs/final-launch-plan.md)
 - [Release Checklist](./docs/release-checklist.md)

@@ -2,6 +2,29 @@
 
 这份文档给 `codex-x` 的首发和后续传播直接用。
 
+## 推荐先发这一版
+
+如果你现在只发一条，我建议先发这条中文版本：
+
+> 我把自己平时给 Codex 用的工作区骨架整理成了一个开源项目：`codex-x`。  
+>  
+> 它不是另一个“大而全 AI 平台”，而是先把 4 件事做好：  
+> 1. 给 Codex 一个能长期记住上下文的工作区  
+> 2. 给用户一条命令就能装起来的初始化器  
+> 3. 给需要的人一个可选的飞书桥接入口  
+> 4. 给 daily memory 一个最小可用的自动整理命令  
+>  
+> 现在仓库里已经有：  
+> - 一键安装脚本  
+> - memory-first workspace template  
+> - `doctor / smoke / start / stop / status / logs / send`  
+> - `digest`：整理最近两天的 daily memory，并可选回写 `status/context`  
+>  
+> GitHub：  
+> https://github.com/armysheng/codex-x  
+>  
+> 如果你也在折腾 Codex / 本地 AI 工作流，欢迎试用和拍砖。
+
 ## X / Twitter
 
 ### Version A

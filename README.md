@@ -1,5 +1,10 @@
 # codex-x
 
+[![GitHub stars](https://img.shields.io/github/stars/armysheng/codex-x?style=flat-square)](https://github.com/armysheng/codex-x/stargazers)
+[![GitHub release](https://img.shields.io/github/v/release/armysheng/codex-x?style=flat-square)](https://github.com/armysheng/codex-x/releases)
+[![License](https://img.shields.io/github/license/armysheng/codex-x?style=flat-square)](./LICENSE)
+[![Codex](https://img.shields.io/badge/Built_for-Codex-0ea5e9?style=flat-square)](https://github.com/armysheng/codex-x)
+
 ![codex-x overview](./docs/assets/codex-x-overview.svg)
 
 ![codex-x install demo](./docs/assets/codex-x-install-terminal.svg)

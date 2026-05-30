@@ -1,0 +1,11 @@
+{
+  "name": "feishu-codex-cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "feishu-codex": "./bin/feishu-codex.mjs"
+  },
+  "scripts": {
+    "test": "node --test ./test/message-format.test.mjs ./test/config.test.mjs ./test/send-command.test.mjs ./test/doctor.test.mjs"
+  }
+}

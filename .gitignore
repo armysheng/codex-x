@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+.env
+.env.*
+.codex-x
+.codex-permission-check
+*.log
+tmp
+dist
+coverage
+*.tgz

@@ -1,0 +1,17 @@
+{
+  "name": "codex-x",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Memory-first Codex workspace template, bootstrapper, and optional Feishu bridge.",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "lint:names": "node ./scripts/check-redactions.mjs"
+  }
+}

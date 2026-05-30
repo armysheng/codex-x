@@ -1,0 +1,10 @@
+{
+  "ownerName": "Alex",
+  "assistantName": "codex-x",
+  "language": "中文",
+  "confirmationBoundaries": [
+    "远端写入",
+    "公开发布",
+    "破坏性操作"
+  ]
+}

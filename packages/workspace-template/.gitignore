@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# local runtime artifacts
+output/
+tmp/
+external-memory/
+.playwright-cli/
+.superpowers/
+.claude/
+
+# logs & caches
+*.log
+.cache/
+coverage/
+
+# secrets
+.env
+.env.*
+*.pem
+*.key

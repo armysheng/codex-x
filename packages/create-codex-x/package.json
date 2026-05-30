@@ -1,0 +1,11 @@
+{
+  "name": "create-codex-x",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "create-codex-x": "./bin/create-codex-x.mjs"
+  },
+  "scripts": {
+    "test": "node --test ./test/create-codex-x.test.mjs"
+  }
+}

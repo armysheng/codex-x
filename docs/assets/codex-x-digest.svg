@@ -1,0 +1,44 @@
+<svg width="1600" height="960" viewBox="0 0 1600 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="100" y1="80" x2="1500" y2="920" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020617"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="shadow" x="90" y="110" width="1420" height="760" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#020617" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="960" fill="url(#bg)"/>
+  <circle cx="1360" cy="160" r="220" fill="#22D3EE" fill-opacity="0.12"/>
+  <circle cx="240" cy="840" r="260" fill="#10B981" fill-opacity="0.08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="130" y="150" width="1340" height="660" rx="30" fill="#020617" stroke="#1E293B" stroke-width="1.5"/>
+  </g>
+
+  <rect x="130" y="150" width="1340" height="72" rx="30" fill="#0B1220"/>
+  <circle cx="178" cy="186" r="8" fill="#F87171"/>
+  <circle cx="206" cy="186" r="8" fill="#FBBF24"/>
+  <circle cx="234" cy="186" r="8" fill="#34D399"/>
+  <text x="272" y="194" fill="#94A3B8" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">daily digest</text>
+
+  <text x="166" y="282" fill="#E2E8F0" font-size="26" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">$ node ./bin/codex-x.mjs digest ./my-workspace --write-status --write-context</text>
+  <text x="166" y="352" fill="#67E8F9" font-size="24" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace"># Digest 2026-05-30</text>
+  <text x="166" y="400" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">## 2026-05-29</text>
+  <text x="194" y="438" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">- 完成 README 初版整理。</text>
+  <text x="194" y="474" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">- 补了结构说明。</text>
+  <text x="166" y="528" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">## 2026-05-30</text>
+  <text x="194" y="566" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">- 增加一键安装脚本。</text>
+  <text x="194" y="602" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">- 新增 install.sh。</text>
+  <text x="194" y="638" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">- 补了 README 首页展示图。</text>
+
+  <rect x="920" y="320" width="470" height="280" rx="24" fill="#0B1220" stroke="#1E293B"/>
+  <text x="952" y="366" fill="#67E8F9" font-size="24" font-weight="700" font-family="Inter, ui-sans-serif, system-ui, sans-serif">Writes back to your workspace</text>
+  <text x="952" y="414" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">0-System/status.md</text>
+  <text x="952" y="454" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">Current focus and recent bullets</text>
+  <text x="952" y="514" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">0-System/context.md</text>
+  <text x="952" y="554" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">A compact 48-hour rolling summary</text>
+
+  <text x="166" y="756" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">A small but useful step toward automatic daily memory organization.</text>
+</svg>

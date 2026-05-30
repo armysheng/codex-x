@@ -1,0 +1,45 @@
+<svg width="1600" height="960" viewBox="0 0 1600 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="90" x2="1480" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="shadow" x="130" y="120" width="1340" height="720" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#020617" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="960" fill="url(#bg)"/>
+  <circle cx="1400" cy="180" r="240" fill="#38BDF8" fill-opacity="0.1"/>
+  <circle cx="260" cy="820" r="260" fill="#14B8A6" fill-opacity="0.08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="160" y="160" width="1280" height="640" rx="30" fill="#020617" stroke="#1E293B" stroke-width="1.5"/>
+  </g>
+
+  <rect x="160" y="160" width="1280" height="72" rx="30" fill="#0B1220"/>
+  <circle cx="208" cy="196" r="8" fill="#F87171"/>
+  <circle cx="236" cy="196" r="8" fill="#FBBF24"/>
+  <circle cx="264" cy="196" r="8" fill="#34D399"/>
+  <text x="302" y="204" fill="#94A3B8" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">workspace structure</text>
+
+  <text x="196" y="296" fill="#E2E8F0" font-size="26" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">my-workspace/</text>
+  <text x="236" y="346" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">0-System/</text>
+  <text x="276" y="386" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">identity · status · context · daily memory</text>
+  <text x="276" y="420" fill="#CBD5E1" font-size="20" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">about-me/ · memory/YYYY-MM-DD.md</text>
+
+  <text x="236" y="484" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">1-Inbox/</text>
+  <text x="276" y="518" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">temporary capture and incoming ideas</text>
+
+  <text x="236" y="582" fill="#CBD5E1" font-size="22" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">2-Projects/ · 3-Thinking/ · 4-Assets/ · 5-Archive/</text>
+  <text x="276" y="616" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">projects, notes, reusable assets, and archives</text>
+
+  <rect x="920" y="300" width="420" height="320" rx="24" fill="#0B1220" stroke="#1E293B"/>
+  <text x="950" y="350" fill="#67E8F9" font-size="24" font-weight="700" font-family="Inter, ui-sans-serif, system-ui, sans-serif">What this structure gives Codex</text>
+  <text x="950" y="410" fill="#CBD5E1" font-size="22" font-family="Inter, ui-sans-serif, system-ui, sans-serif">1. A stable place for identity and preferences</text>
+  <text x="950" y="462" fill="#CBD5E1" font-size="22" font-family="Inter, ui-sans-serif, system-ui, sans-serif">2. A lightweight daily memory system</text>
+  <text x="950" y="514" fill="#CBD5E1" font-size="22" font-family="Inter, ui-sans-serif, system-ui, sans-serif">3. Clear boundaries between inbox, projects, and archive</text>
+  <text x="950" y="566" fill="#CBD5E1" font-size="22" font-family="Inter, ui-sans-serif, system-ui, sans-serif">4. A workspace that can grow without becoming a platform</text>
+
+  <text x="196" y="736" fill="#94A3B8" font-size="20" font-family="Inter, ui-sans-serif, system-ui, sans-serif">The goal is not complexity. The goal is to give Codex a workspace that keeps context alive.</text>
+</svg>

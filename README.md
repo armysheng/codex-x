@@ -6,6 +6,10 @@
 
 ![codex-x doctor smoke demo](./docs/assets/codex-x-doctor-smoke.svg)
 
+![codex-x workspace structure](./docs/assets/codex-x-workspace-structure.svg)
+
+![codex-x daily digest](./docs/assets/codex-x-digest.svg)
+
 `codex-x` 是一个给 Codex 用的本地工作区工具箱。
 
 它解决的是这几个很实际的问题：

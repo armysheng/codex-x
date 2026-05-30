@@ -4,6 +4,7 @@ import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { fileURLToPath } from "node:url";
 import { applyBootstrap, readAnswersFile } from "./bootstrap.mjs";
+import { runDigest } from "./digest.mjs";
 import { normalizeAnswers } from "./questions.mjs";
 import { copyTemplate, replaceProjectName } from "./render-template.mjs";
 
@@ -12,6 +13,18 @@ const REPO_ROOT = path.resolve(__dirname, "../../..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "packages", "workspace-template");
 
 export async function main(argv = []) {
+  const [command] = argv;
+  if (command === "digest") {
+    const digestOptions = parseDigestArgs(argv.slice(1));
+    const output = runDigest({
+      cwd: path.resolve(process.cwd(), digestOptions.targetDir || "."),
+      today: digestOptions.today,
+      writeStatus: digestOptions.writeStatus,
+      writeContext: digestOptions.writeContext
+    });
+    console.log(output);
+    return;
+  }
   const options = parseArgs(argv);
   const answers = normalizeAnswers(
     options.answersFile ? readAnswersFile(options.answersFile) : await collectAnswers(options)
@@ -34,6 +47,18 @@ function parseArgs(argv) {
   }
   if (!options.targetDir) {
     throw new Error("Usage: create-codex-x [--yes] [--answers file.json] <target-dir>");
+  }
+  return options;
+}
+
+function parseDigestArgs(argv) {
+  const options = { targetDir: ".", today: "", writeStatus: false, writeContext: false };
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === "--today") options.today = argv[i + 1], i += 1;
+    else if (arg === "--write-status") options.writeStatus = true;
+    else if (arg === "--write-context") options.writeContext = true;
+    else if (!arg.startsWith("--")) options.targetDir = arg;
   }
   return options;
 }

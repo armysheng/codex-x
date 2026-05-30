@@ -10,15 +10,22 @@ if (command === "init") {
     console.error(error instanceof Error ? error.message : String(error));
     process.exit(1);
   });
+} else if (command === "digest") {
+  createWorkspace(["digest", ...rest]).catch((error) => {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exit(1);
+  });
 } else if (command === "help" || command === "--help" || command === "-h") {
   process.stdout.write(
     [
       "Usage:",
       "  codex-x init [--yes] [--answers file.json] <target-dir>",
+      "  codex-x digest [target-dir] [--today YYYY-MM-DD] [--write-status] [--write-context]",
       "",
       "Examples:",
       "  codex-x init my-workspace",
-      "  codex-x init --answers examples/bootstrap.answers.example.json ./tmp/my-workspace"
+      "  codex-x init --answers examples/bootstrap.answers.example.json ./tmp/my-workspace",
+      "  codex-x digest ./tmp/my-workspace --write-status --write-context"
     ].join("\n") + "\n"
   );
 } else {

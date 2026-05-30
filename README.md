@@ -88,6 +88,11 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 - `bridge smoke`
 - `send`
 
+另外，`create-codex-x` 现在还带了一个很实用的能力：
+
+- `digest`
+  用来整理今天/昨天的 daily memory，并可选回写 `status.md` / `context.md`
+
 ## 手动安装（如果你想自己控制每一步）
 
 ### 1. 安装依赖
@@ -144,6 +149,21 @@ node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge smoke
 - `lark-cli` 已登录 profile
 - 本地可用的 `codex`
 - 一个存在的 `codexWorkdir`
+
+## 每天自动整理（最小版）
+
+如果你想把今天/昨天的 daily memory 快速整理成摘要，可以直接跑：
+
+```bash
+node ./bin/codex-x.mjs digest ./tmp/my-workspace --write-status --write-context
+```
+
+这会：
+
+- 读取最近两天的 `0-System/memory/*.md`
+- 生成一段 digest
+- 可选回写 `status.md`
+- 可选回写 `context.md`
 
 ## 仓库结构
 

@@ -74,3 +74,14 @@ node packages/feishu-codex-cli/bin/feishu-codex.mjs init --write-config
 ```bash
 node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge start
 ```
+
+## 6. 如果你想先体验“每天自动整理”
+
+```bash
+node ./bin/codex-x.mjs digest ./tmp/my-workspace --write-status --write-context
+```
+
+这条命令会读取最近两天的 daily memory，并把摘要回写到：
+
+- `0-System/status.md`
+- `0-System/context.md`

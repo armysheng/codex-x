@@ -2,19 +2,31 @@
 
 `codex-x` 提供两条路径：
 
-- 只用 `workspace-template` 和初始化器
-- 在此基础上再接入飞书桥接
+- 一条命令安装
+- 手动控制每一步
 
 第一版目标是让用户先在本地工作区里跑通记忆系统，不要求任何远端服务。
 
-## 1. 安装依赖
+## 1. 一条命令安装
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
+```
+
+这条命令会自动完成：
+
+- 拉取仓库
+- 安装依赖
+- 初始化默认工作区
+
+## 2. 手动安装（如果你想自己控制每一步）
 
 ```bash
 cd codex-x
 npm install
 ```
 
-## 2. 生成一个工作区
+## 3. 生成一个工作区
 
 ```bash
 node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./tmp/my-workspace
@@ -28,7 +40,7 @@ node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./
 npm run init:workspace -- ./tmp/my-workspace
 ```
 
-## 3. 进入工作区使用 Codex
+## 4. 进入工作区使用 Codex
 
 ```bash
 cd ./tmp/my-workspace
@@ -44,7 +56,7 @@ codex
 - `0-System/context.md`
 - `0-System/memory/<today>.md`
 
-## 4. 如果要接飞书
+## 5. 如果要接飞书
 
 ```bash
 cd ../../

@@ -14,6 +14,20 @@
 - 用一个**初始化器**把工作区直接搭起来
 - 用一个**可选 CLI** 把飞书接到本地 Codex
 
+## 一条命令安装
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)
+```
+
+这条命令会：
+
+1. 拉取 `codex-x`
+2. 安装依赖
+3. 初始化一个默认工作区
+
+如果你想让 Codex 代你安装，直接把这句丢给它也行。
+
 ## 你可以把它理解成什么
 
 如果一句话解释：
@@ -65,7 +79,7 @@
   - `bridge smoke`
   - `send`
 
-## 3 分钟上手
+## 手动安装（如果你想自己控制每一步）
 
 ### 1. 安装依赖
 
@@ -97,9 +111,9 @@ codex
 ```text
 请在当前仓库根目录执行：
 
-1. `npm install`
-2. `node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./tmp/my-workspace`
-3. 告诉我生成后的工作区结构，并提醒我下一步进入 `./tmp/my-workspace` 使用 `codex`
+1. `bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/install.sh)`
+2. 告诉我安装后的 repo 目录和 workspace 目录
+3. 提醒我下一步进入 workspace 后运行 `codex`
 ```
 
 如果你想走交互式初始化，把第 2 步换成：

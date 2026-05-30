@@ -278,6 +278,8 @@ node ./scripts/check-redactions.mjs
 - [Channel Posts](./docs/channel-posts.md)
 - [Final Posts](./docs/final-posts.md)
 - [First Week Checklist](./docs/first-week-checklist.md)
+- [Discussion Template](./docs/discussion-template.md)
+- [Metrics Tracker](./docs/metrics-tracker.md)
 - [Screenshots Plan](./docs/screenshots.md)
 - [Final Launch Plan](./docs/final-launch-plan.md)
 - [Release Checklist](./docs/release-checklist.md)

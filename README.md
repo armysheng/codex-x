@@ -167,7 +167,15 @@ node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge smoke
 
 - 名称：`codex-x 每日记忆整理`
 - 时间：每天 `23:40`
-- 动作：整理最近两天的 daily memory，并回写 `status.md` / `context.md`
+- 动作：定时唤醒 Codex，让模型直接读取工作区规则和记忆文件，整理重要信息，并回写 `daily memory` / `status.md` / `context.md`
+
+它的机制不是“偷偷跑一个系统脚本”，而是一条本地 Codex automation prompt：
+
+- 先读 `AGENTS.md` / `CLAUDE.md`，遵守工作区规则
+- 再读今天和昨天的 `0-System/memory/YYYY-MM-DD.md`
+- 把重要信息写进当天 daily memory：关键决策、项目进展、资源变化、工具变化、错误教训、用户明确偏好、承诺过的待办
+- 用可追溯摘要更新 `0-System/status.md`，阶段背景变化时更新 `0-System/context.md`
+- 只在稳定偏好或长期结论出现时更新 `0-System/about-me/MEMORY.md`
 
 交互式初始化会询问是否注册；一键安装、`--yes` 和 `--answers` 默认启用。若不想注册：
 
@@ -181,7 +189,7 @@ node ./bin/codex-x.mjs init --no-automation ./tmp/my-workspace
 node ./bin/codex-x.mjs automation install ./tmp/my-workspace
 ```
 
-手动调试时也可以直接跑：
+`digest` 命令仍然保留，但它只是手动调试/兜底工具：
 
 ```bash
 node ./bin/codex-x.mjs digest ./tmp/my-workspace --write-status --write-context

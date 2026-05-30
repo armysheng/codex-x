@@ -52,11 +52,16 @@ Codex 仍然在本地工作区里读取和更新记忆文件。
 - `rrule`: 每天 `23:40`
 - `cwd`: 初始化出来的工作区
 
-这条 automation 会在 Codex 里执行本地整理命令：
+这条 automation 不依赖系统 cron，也不要求用户理解额外脚本。它本质是一条本地 Codex prompt：到点后唤醒 Codex，让模型按工作区规则自己整理记忆。
 
-```bash
-node <codex-x-repo>/bin/codex-x.mjs digest <workspace> --write-status --write-context
-```
+默认整理逻辑：
+
+- 先读取 `AGENTS.md` / `CLAUDE.md`，遵守安全、记忆和外部动作边界。
+- 读取今天和昨天的 `0-System/memory/YYYY-MM-DD.md`，必要时创建今天的 daily memory。
+- 尽量把重要信息写进当天 daily memory，包括关键决策、项目进展、资源变化、工具变化、错误教训、用户明确偏好、承诺过的待办。
+- 每条重要信息尽量保留证据线索，例如文件路径、命令结果、会话中明确确认的结论或可复查来源。
+- 用简短摘要更新 `0-System/status.md`，阶段背景变化时更新 `0-System/context.md`。
+- 只有稳定偏好或长期结论才更新 `0-System/about-me/MEMORY.md`。
 
 已有工作区可以用下面的命令补装或重建：
 

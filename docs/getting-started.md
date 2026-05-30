@@ -18,7 +18,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 - 拉取仓库
 - 安装依赖
 - 初始化默认工作区
-- 注册 Codex automation：每天整理最近两天的记忆并回写 `status/context`
+- 注册 Codex automation：每天唤醒 Codex，让模型按工作区规则整理重要信息并回写记忆文件
 
 不想注册自动整理任务时，可以加：
 
@@ -41,7 +41,14 @@ node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./
 
 如果不带 `--answers`，初始化器会进入交互式问答。
 
-交互式初始化会询问是否注册 Codex automation；`--yes` 和 `--answers` 默认注册。它每天 `23:40` 在该工作区执行记忆整理。
+交互式初始化会询问是否注册 Codex automation；`--yes` 和 `--answers` 默认注册。它每天 `23:40` 在该工作区唤醒 Codex，让模型直接整理记忆。
+
+默认机制是：
+
+- 先读工作区规则：`AGENTS.md` / `CLAUDE.md`
+- 再读今天和昨天的 daily memory
+- 把关键决策、项目进展、资源变化、错误教训、用户偏好和待办写回当天记忆
+- 用摘要更新 `status.md` / `context.md`
 
 如果这次不想注册：
 

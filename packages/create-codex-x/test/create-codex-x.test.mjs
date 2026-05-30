@@ -79,7 +79,9 @@ test("bootstrap registers a Codex daily memory automation", () => {
   assert.match(automation, /rrule = "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR,SA,SU;BYHOUR=23;BYMINUTE=40"/);
   assert.match(automation, /execution_environment = "worktree"/);
   assert.match(automation, new RegExp(escapeRegExp(`cwds = ["${targetDir}"]`)));
-  assert.match(automation, new RegExp(escapeRegExp(`node '${path.join(repoRoot, "bin", "codex-x.mjs")}' digest '${targetDir}' --write-status --write-context`)));
+  assert.match(automation, /直接由 Codex 模型整理本地记忆文件/);
+  assert.match(automation, /尽量把重要信息写进今天的 daily memory/);
+  assert.doesNotMatch(automation, /codex-x\.mjs.*digest/);
 });
 
 test("automation install registers Codex digest automation for an existing workspace", async () => {

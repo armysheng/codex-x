@@ -161,9 +161,21 @@ node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge smoke
 - 本地可用的 `codex`
 - 一个存在的 `codexWorkdir`
 
-## 每天自动整理（最小版）
+## 每天自动整理
 
-如果你想把今天/昨天的 daily memory 快速整理成摘要，可以直接跑：
+初始化完成后，`codex-x` 会自动注册一个 Codex automation：
+
+- 名称：`codex-x 每日记忆整理`
+- 时间：每天 `23:40`
+- 动作：整理最近两天的 daily memory，并回写 `status.md` / `context.md`
+
+如果你已经有一个工作区，只想补装这条 Codex automation：
+
+```bash
+node ./bin/codex-x.mjs automation install ./tmp/my-workspace
+```
+
+手动调试时也可以直接跑：
 
 ```bash
 node ./bin/codex-x.mjs digest ./tmp/my-workspace --write-status --write-context

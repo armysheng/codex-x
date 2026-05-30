@@ -4,6 +4,7 @@ import { existsSync, mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { applyBootstrap } from "../src/bootstrap.mjs";
+import { main } from "../src/index.mjs";
 import { normalizeAnswers } from "../src/questions.mjs";
 import { copyTemplate, replaceProjectName } from "../src/render-template.mjs";
 
@@ -30,7 +31,9 @@ test("bootstrap writes user files, first memory, and archives BOOTSTRAP", () => 
     language: "中文",
     confirmationBoundaries: ["远端写入", "公开发布"]
   });
-  applyBootstrap(targetDir, answers, new Date("2026-05-28T08:00:00Z"));
+  applyBootstrap(targetDir, answers, new Date("2026-05-28T08:00:00Z"), {
+    registerCodexAutomation: false
+  });
 
   const user = readFileSync(path.join(targetDir, "0-System/about-me/USER.md"), "utf8");
   const identity = readFileSync(path.join(targetDir, "0-System/about-me/IDENTITY.md"), "utf8");
@@ -42,3 +45,63 @@ test("bootstrap writes user files, first memory, and archives BOOTSTRAP", () => 
   assert.equal(existsSync(path.join(targetDir, "0-System/about-me/BOOTSTRAP.md")), false);
   assert.equal(existsSync(path.join(targetDir, "5-Archive/bootstrap/BOOTSTRAP-2026-05-28.md")), true);
 });
+
+test("bootstrap registers a Codex daily memory automation", () => {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), "codex-x-automation-"));
+  const targetDir = path.join(tempRoot, "workspace");
+  const codexHome = path.join(tempRoot, ".codex");
+  copyTemplate(templateDir, targetDir);
+  const answers = normalizeAnswers({
+    ownerName: "Alex",
+    assistantName: "Xiao X",
+    language: "中文",
+    confirmationBoundaries: ["远端写入"]
+  });
+
+  const result = applyBootstrap(targetDir, answers, new Date("2026-05-28T08:00:00Z"), {
+    codexHome,
+    repoRoot,
+    nowMs: 1779955200000
+  });
+
+  const automationPath = path.join(
+    codexHome,
+    "automations",
+    "codex-x-memory-digest",
+    "automation.toml"
+  );
+  const automation = readFileSync(automationPath, "utf8");
+
+  assert.equal(result.codexAutomation.path, automationPath);
+  assert.match(automation, /id = "codex-x-memory-digest"/);
+  assert.match(automation, /kind = "cron"/);
+  assert.match(automation, /name = "codex-x 每日记忆整理"/);
+  assert.match(automation, /rrule = "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR,SA,SU;BYHOUR=23;BYMINUTE=40"/);
+  assert.match(automation, /execution_environment = "worktree"/);
+  assert.match(automation, new RegExp(escapeRegExp(`cwds = ["${targetDir}"]`)));
+  assert.match(automation, new RegExp(escapeRegExp(`node '${path.join(repoRoot, "bin", "codex-x.mjs")}' digest '${targetDir}' --write-status --write-context`)));
+});
+
+test("automation install registers Codex digest automation for an existing workspace", async () => {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), "codex-x-automation-command-"));
+  const targetDir = path.join(tempRoot, "workspace");
+  const codexHome = path.join(tempRoot, ".codex");
+  copyTemplate(templateDir, targetDir);
+
+  await main(["automation", "install", targetDir], {
+    codexHome,
+    repoRoot,
+    nowMs: 1779955200000
+  });
+
+  const automation = readFileSync(
+    path.join(codexHome, "automations", "codex-x-memory-digest", "automation.toml"),
+    "utf8"
+  );
+  assert.match(automation, /name = "codex-x 每日记忆整理"/);
+  assert.match(automation, new RegExp(escapeRegExp(`cwds = ["${targetDir}"]`)));
+});
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}

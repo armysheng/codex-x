@@ -16,6 +16,11 @@ export async function runRootCli(argv = [], deps = {}) {
     return;
   }
 
+  if (command === "automation") {
+    await createMain(["automation", ...rest]);
+    return;
+  }
+
   if (command === "doctor") {
     await feishu(["doctor"], deps.io || console);
     return;
@@ -36,6 +41,7 @@ export async function runRootCli(argv = [], deps = {}) {
       [
         "Usage:",
         "  codex-x init [--yes] [--answers file.json] <target-dir>",
+        "  codex-x automation install [target-dir]",
         "  codex-x digest [target-dir] [--today YYYY-MM-DD] [--write-status] [--write-context]",
         "  codex-x doctor",
         "  codex-x bridge <start|status|logs|stop|smoke>",
@@ -43,6 +49,7 @@ export async function runRootCli(argv = [], deps = {}) {
         "",
         "Examples:",
         "  codex-x init my-workspace",
+        "  codex-x automation install ./my-workspace",
         "  codex-x digest ./my-workspace --write-status --write-context",
         "  codex-x doctor",
         "  codex-x bridge smoke"

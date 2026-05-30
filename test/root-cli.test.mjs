@@ -34,3 +34,14 @@ test("root cli forwards bridge smoke to feishu cli", async () => {
   });
   assert.deepEqual(calls, [["bridge", "smoke"]]);
 });
+
+test("root cli forwards automation install to createWorkspace", async () => {
+  const calls = [];
+  await runRootCli(["automation", "install", "my-workspace"], {
+    createMain: async (args) => calls.push(args),
+    feishuMain: async () => {
+      throw new Error("should not call feishuMain");
+    }
+  });
+  assert.deepEqual(calls, [["automation", "install", "my-workspace"]]);
+});

@@ -93,4 +93,8 @@ Workspace: $WORKSPACE_DIR
 Next:
   cd "$WORKSPACE_DIR"
   codex
+
+Codex automation:
+  每日记忆整理已注册到本机 Codex automation。
+  如需重建：node "$TARGET_DIR/bin/codex-x.mjs" automation install "$WORKSPACE_DIR"
 EOF

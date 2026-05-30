@@ -4,6 +4,7 @@
 
 - Codex 进入工作区时应优先读取哪些文件
 - 初始化后哪些文件最常被用户维护
+- 初始化如何注册 Codex automation 做每日记忆整理
 - 飞书桥接如何把消息注入本地 Codex thread
 
 第一版会以 `packages/workspace-template/` 中的读取顺序为准。
@@ -41,3 +42,24 @@
 - 文件以本地路径说明注入
 
 Codex 仍然在本地工作区里读取和更新记忆文件。
+
+## Codex automation
+
+`codex-x init` 会写入一条本地 Codex automation：
+
+- `id`: `codex-x-memory-digest`
+- `name`: `codex-x 每日记忆整理`
+- `rrule`: 每天 `23:40`
+- `cwd`: 初始化出来的工作区
+
+这条 automation 会在 Codex 里执行本地整理命令：
+
+```bash
+node <codex-x-repo>/bin/codex-x.mjs digest <workspace> --write-status --write-context
+```
+
+已有工作区可以用下面的命令补装或重建：
+
+```bash
+node ./bin/codex-x.mjs automation install <workspace>
+```

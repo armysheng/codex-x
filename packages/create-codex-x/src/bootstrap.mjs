@@ -1,11 +1,12 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { registerCodexMemoryDigestAutomation } from "./codex-automation.mjs";
 
 function todayString(now = new Date()) {
   return now.toISOString().slice(0, 10);
 }
 
-export function applyBootstrap(targetDir, answers, now = new Date()) {
+export function applyBootstrap(targetDir, answers, now = new Date(), options = {}) {
   const date = todayString(now);
   const aboutDir = path.join(targetDir, "0-System", "about-me");
   const memoryDir = path.join(targetDir, "0-System", "memory");
@@ -67,6 +68,17 @@ export function applyBootstrap(targetDir, answers, now = new Date()) {
   if (existsSync(bootstrapPath)) {
     renameSync(bootstrapPath, path.join(archiveDir, `BOOTSTRAP-${date}.md`));
   }
+
+  const result = {};
+  if (options.registerCodexAutomation !== false) {
+    result.codexAutomation = registerCodexMemoryDigestAutomation({
+      workspaceDir: targetDir,
+      codexHome: options.codexHome,
+      repoRoot: options.repoRoot,
+      nowMs: options.nowMs || now.getTime()
+    });
+  }
+  return result;
 }
 
 export function readAnswersFile(filePath) {

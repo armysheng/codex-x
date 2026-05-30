@@ -18,6 +18,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/armysheng/codex-x/main/insta
 - 拉取仓库
 - 安装依赖
 - 初始化默认工作区
+- 注册 Codex automation：每天整理最近两天的记忆并回写 `status/context`
 
 ## 2. 手动安装（如果你想自己控制每一步）
 
@@ -33,6 +34,8 @@ node ./bin/codex-x.mjs init --answers examples/bootstrap.answers.example.json ./
 ```
 
 如果不带 `--answers`，初始化器会进入交互式问答。
+
+初始化会同时注册一条 Codex automation：`codex-x 每日记忆整理`。它每天 `23:40` 在该工作区执行记忆整理。
 
 也可以这样：
 
@@ -75,13 +78,21 @@ node packages/feishu-codex-cli/bin/feishu-codex.mjs init --write-config
 node packages/feishu-codex-cli/bin/feishu-codex.mjs bridge start
 ```
 
-## 6. 如果你想先体验“每天自动整理”
+## 6. 每天自动整理
+
+默认初始化已经注册 Codex automation。如果你是已有工作区，或者想重建这条任务：
+
+```bash
+node ./bin/codex-x.mjs automation install ./tmp/my-workspace
+```
+
+手动调试时可以运行：
 
 ```bash
 node ./bin/codex-x.mjs digest ./tmp/my-workspace --write-status --write-context
 ```
 
-这条命令会读取最近两天的 daily memory，并把摘要回写到：
+它会读取最近两天的 daily memory，并把摘要回写到：
 
 - `0-System/status.md`
 - `0-System/context.md`

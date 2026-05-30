@@ -4,6 +4,7 @@ import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import { fileURLToPath } from "node:url";
 import { applyBootstrap, readAnswersFile } from "./bootstrap.mjs";
+import { registerCodexMemoryDigestAutomation } from "./codex-automation.mjs";
 import { runDigest } from "./digest.mjs";
 import { normalizeAnswers } from "./questions.mjs";
 import { copyTemplate, replaceProjectName } from "./render-template.mjs";
@@ -12,7 +13,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "packages", "workspace-template");
 
-export async function main(argv = []) {
+export async function main(argv = [], deps = {}) {
   const [command] = argv;
   if (command === "digest") {
     const digestOptions = parseDigestArgs(argv.slice(1));
@@ -25,6 +26,17 @@ export async function main(argv = []) {
     console.log(output);
     return;
   }
+  if (command === "automation") {
+    const automationOptions = parseAutomationArgs(argv.slice(1));
+    const result = registerCodexMemoryDigestAutomation({
+      workspaceDir: path.resolve(process.cwd(), automationOptions.targetDir),
+      codexHome: deps.codexHome,
+      repoRoot: deps.repoRoot || REPO_ROOT,
+      nowMs: deps.nowMs
+    });
+    console.log(`Registered Codex automation: ${result.path}`);
+    return;
+  }
   const options = parseArgs(argv);
   const answers = normalizeAnswers(
     options.answersFile ? readAnswersFile(options.answersFile) : await collectAnswers(options)
@@ -33,8 +45,15 @@ export async function main(argv = []) {
   mkdirSync(path.dirname(targetDir), { recursive: true });
   copyTemplate(TEMPLATE_DIR, targetDir);
   replaceProjectName(targetDir);
-  applyBootstrap(targetDir, answers);
+  const result = applyBootstrap(targetDir, answers, new Date(), {
+    codexHome: deps.codexHome,
+    repoRoot: deps.repoRoot || REPO_ROOT,
+    nowMs: deps.nowMs
+  });
   console.log(`Initialized codex-x workspace at ${targetDir}`);
+  if (result.codexAutomation) {
+    console.log(`Registered Codex automation: ${result.codexAutomation.path}`);
+  }
 }
 
 function parseArgs(argv) {
@@ -49,6 +68,14 @@ function parseArgs(argv) {
     throw new Error("Usage: create-codex-x [--yes] [--answers file.json] <target-dir>");
   }
   return options;
+}
+
+function parseAutomationArgs(argv) {
+  const [subcommand, targetDir = "."] = argv;
+  if (subcommand !== "install") {
+    throw new Error("Usage: create-codex-x automation install [target-dir]");
+  }
+  return { targetDir };
 }
 
 function parseDigestArgs(argv) {

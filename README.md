@@ -14,6 +14,12 @@
 - 用一个**初始化器**把工作区直接搭起来
 - 用一个**可选 CLI** 把飞书接到本地 Codex
 
+## 你可以把它理解成什么
+
+如果一句话解释：
+
+> `codex-x` = 一个给 Codex 用的、带记忆系统的本地工作区骨架，再加一个可选的消息桥接入口。
+
 ## 为什么它值得被 star
 
 因为它不是另一个“大而全 AI 框架”，而是一个更容易真正用起来的组合：
@@ -29,6 +35,15 @@
 
 4. **Extensible without over-engineering**
    顶层只有 3 个功能包，但后面还能继续长。
+
+## 为什么不是别的方案
+
+| 方案 | 问题 | `codex-x` 的取舍 |
+|---|---|---|
+| 纯 prompt / 单个 AGENTS 文件 | 很快失去阶段上下文 | 直接给你 `status / context / daily memory / long-term memory` 的文件结构 |
+| 一开始就上数据库 / SaaS | 太重，很多人用不起来 | 先本地优先，先跑通最小闭环 |
+| 只做桥接机器人 | 能发消息，但不记项目 | 桥接只是入口，工作区记忆才是核心 |
+| 大而全 AI 平台 | 学习成本高，定制度低 | 只保留现在真的存在的 3 个能力包 |
 
 ## 核心能力
 
@@ -129,6 +144,48 @@ packages/
 - Feishu CLI 具备配置、自检、起停、状态、日志和 smoke 检查
 - 全量测试已覆盖主链路
 
+## FAQ
+
+### 这是不是另一个 AI agent 平台？
+
+不是。它更像一个 **Codex 工作区工具箱**。
+
+重点不是“托管一切”，而是把这几件事做好：
+
+- 让工作区有记忆
+- 让初始化足够顺
+- 让消息入口能接进来
+
+### 我不用飞书，能用吗？
+
+可以。
+
+飞书 CLI 是可选模块。只想用记忆系统和初始化器，直接用：
+
+```bash
+node packages/create-codex-x/bin/create-codex-x.mjs ...
+```
+
+就够了。
+
+### 现在为什么还没直接拆成很多共享包？
+
+因为当前真正存在的能力就 3 个：
+
+- `workspace-template`
+- `create-codex-x`
+- `feishu-codex-cli`
+
+现在先把边界贴着真实功能长，比一开始就平台化更健康。
+
+### 这个项目现在最缺什么？
+
+最缺的是：
+
+- 一份更直观的 demo / GIF / screenshot
+- 一次真正的飞书消息端到端公开演示
+- 更平滑的安装路径（比如未来真正发布到 npm）
+
 ## 验证
 
 ```bash
@@ -143,6 +200,7 @@ node ./scripts/check-redactions.mjs
 - [Codex Integration](./docs/codex-integration.md)
 - [Memory Model](./docs/memory-model.md)
 - [Feishu Setup](./docs/feishu-setup.md)
+- [FAQ](./docs/faq.md)
 - [Positioning](./docs/positioning.md)
 - [Release Checklist](./docs/release-checklist.md)
 - [Contributing](./CONTRIBUTING.md)
